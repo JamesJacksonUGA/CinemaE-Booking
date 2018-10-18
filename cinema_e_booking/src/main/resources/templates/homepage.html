@@ -3,20 +3,22 @@
 <head>
     <title>Athens Tickets</title>
     <link href="css/homepagestyle.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.css" th:href="@{/bootstrap/css/bootstrap.css}"/>
+    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style> </style>
 </head>
 
-<body>
+<body class="text-center">
     
 <div class="header">
     <h1>Athen's Tickets</h1>
 </div>    
     
 <div class="topnav">
-    <a href="Homepage.html" style="background-color: red">Home</a>
-    <a href="#">Movies</a>
+    <a href="/home" style="background-color: red">Home</a>
+    <a href="/movies">Movies</a>
     <a href="#">Showtimes</a>
     <div class="search-container">
         <form action="/action_page.php">
@@ -61,7 +63,8 @@
         </div>
     </div>
 </div>
-</body>
     
 </html>
+
+
 

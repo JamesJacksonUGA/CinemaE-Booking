@@ -12,23 +12,31 @@ import cinema.booking.models.Movie;
 import cinema.booking.rowMapper.MovieRowMapper;
 
 @Controller
-public class IndexController {
-	
+public class BrowseMovieController {
+
 	@Autowired
     JdbcTemplate jdbcTemplate;
-
-	@RequestMapping(value= {"/", "/home"})
-	public String index(Model model) {
+	
+	@RequestMapping(value= {"/movies"})
+	public String movies(Model model) {
 		
-		String query = "SELECT * FROM movie";
+		String query = "SELECT * FROM movie WHERE coming_soon=0";
 		List<Movie> movies = jdbcTemplate.query(query, new MovieRowMapper());
 				
 		model.addAttribute("movies", movies);
 		
-		return "homepage";
+		return "movies";
+	}
+	
+	@RequestMapping(value= {"/comingSoon"})
+	public String comingSoon(Model model) {
+		
+		String query = "SELECT * FROM movie WHERE coming_soon=1";
+		List<Movie> comingSoon = jdbcTemplate.query(query, new MovieRowMapper());
+				
+		model.addAttribute("movies", comingSoon);
+		
+		return "comingSoon";
 	}
 	
 }
-
-
-

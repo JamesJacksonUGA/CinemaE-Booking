@@ -39,6 +39,8 @@ public class Movie {
 	@OneToMany(cascade = CascadeType.ALL, 
 	        mappedBy = "movie", orphanRemoval = true)
 	private List<Showtime> showtimes = new ArrayList<>();
+	@NotNull
+	private Integer length;
 	
 	
 	
@@ -131,5 +133,12 @@ public class Movie {
         showtime.setMovie(null);
         this.showtimes.remove(showtime);
     }
+	public Integer getLength() {
+		return length;
+	}
+	public void setLength(Integer length) {
+		this.length = length;
+	}
+    
 	
 }
