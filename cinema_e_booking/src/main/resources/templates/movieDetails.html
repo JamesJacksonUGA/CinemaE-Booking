@@ -1,18 +1,22 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
+	<title>Browse Movies</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link href="/css/homepagestyle.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="/../static/bootstrap/css/bootstrap.css" th:href="@{/bootstrap/css/bootstrap.css}"/>
 
 </head>
+<body>
 
-<body th:fragment="topNav">
 
 <div class="header">
-    <h1>Athen's Tickets</h1>
+    <h1>Athens Tickets</h1>
 </div>    
     
-<div class="topnav">
-    <a href="/home" style="background-color: red">Home</a>
-    <a href="#">Movies</a>
+<div class="topnav sticky">
+    <a href="/home">Home</a>
+    <a href="/movies" style="background-color: red" >Movies</a>
     <a href="#">Showtimes</a>
     <div class="search-container">
         <form action="/action_page.php">
@@ -58,4 +62,40 @@
     </div>
 </div>
 
+
+<div th:each="movie : ${movies}">
+<div class="clearfix float-my-children">
+   <img th:src="@{${'/images/' + movie.picture}}" width=150>
+   <div class=movie_description>
+       <h3 th:text="${movie.title}">Movie Title</h3>
+       <p><span th:text="${movie.rating}"></span> | <span th:text="${movie.length}"></span> min | <span th:text="${movie.category}"></span> 
+       <br><span th:text="${movie.synopsis}"></span></p>
+       <ul style="list-style-type: none; margin-left: -40px;" >
+        <li>Directors: <span th:text="${movie.director}"></span></li>
+        <li>Stars: <span th:text="${movie.cast}"></span></li>
+       </ul>
+       <form action="/action.php">
+        <input type="submit" name="action" value="11:00am">
+        <input type="submit" name="action" value="1:00pm">
+        <input type="submit" name="action" value="4:00pm">
+        <input type="submit" name="action" value="7:00pm">
+        <input type="submit" name="action" value="10:00pm">
+       </form>
+     
+  </div>
+</div>
+</div>
+
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 </body>
+
+
+</html>
+
+
+

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" 
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 	<title>Browse Movies</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -13,10 +14,10 @@
 
 
 <div class="header">
-    <h1>Athen's Tickets</h1>
+    <h1>Athens Tickets</h1>
 </div>    
     
-<div class="topnav">
+<div class="topnav sticky">
     <a href="/home">Home</a>
     <a href="/movies" style="background-color: red" >Movies</a>
     <a href="#">Showtimes</a>
@@ -73,7 +74,7 @@
       <h1 class="jumbotron-heading">Browse all movies</h1>
       <p class="lead text-muted">Search through our selection of the hottest movies in theater's right now. Be sure you always get the perfect spot by purchasing your ticket in advance.</p>
       <p>
-        <a href="/movies" class="btn btn-primary my-2">In theater's now</a>
+        <a href="/movies" class="btn btn-primary my-2">In theaters now</a>
         <a href="/comingSoon" class="btn btn-secondary my-2">Coming soon</a>
       </p>
     </div>
@@ -92,7 +93,7 @@
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <a class="btn btn-sm btn-outline-secondary" href="#" role="button">View showtimes</a>
-                  <a class="btn btn-sm btn-outline-secondary" href="#" role="button">Edit</a>
+                  <a class="btn btn-sm btn-outline-secondary" th:href="@{'/movieDetails/' + ${movie.movieId}}" role="button">Details</a>
                 </div>
                 <small class="text-muted" th:text="${movie.length} + ' minutes'">Movie Length</small>
               </div>
@@ -118,10 +119,11 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-<script src="../../assets/js/vendor/popper.min.js"></script>
-<script src="../../dist/js/bootstrap.min.js"></script>
-<script src="../../assets/js/vendor/holder.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 </body>
+
+
 </html>
+
+
+

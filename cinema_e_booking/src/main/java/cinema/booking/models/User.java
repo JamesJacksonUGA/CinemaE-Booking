@@ -44,15 +44,15 @@ public class User {
 	@OneToMany(cascade = CascadeType.ALL, 
 	        mappedBy = "user", orphanRemoval = true)
 	private List<Booking> bookings = new ArrayList<>();
-	
-
+	@OneToMany(cascade = CascadeType.ALL, 
+	        mappedBy = "userAddress", orphanRemoval = true)
+	private List<Address> addresses = new ArrayList<>();
+	@OneToMany(cascade = CascadeType.ALL, 
+	        mappedBy = "userPaymentInfo", orphanRemoval = true)
+	private List<PaymentInfo> paymentInfos = new ArrayList<>();
 	
 	//optional user fields
 	private String phone;
-	private String street;
-	private String city;
-	private String state;
-	private String zipCode;
 	private String cardType;
 	private String cardNumber;
 	private String cardExpDateMonth;
@@ -60,26 +60,19 @@ public class User {
 	private String cardZip;
 	
 	
+	
 	public User() {
 		
 	}
-
-
 	public Integer getUserId() {
 		return userId;
 	}
-
-
 	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
-
-
 	public String getFirstName() {
 		return firstName;
 	}
-
-
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
@@ -164,47 +157,7 @@ public class User {
 		this.phone = phone;
 	}
 
-
-	public String getStreet() {
-		return street;
-	}
-
-
-	public void setStreet(String street) {
-		this.street = street;
-	}
-
-
-	public String getCity() {
-		return city;
-	}
-
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-
-	public String getState() {
-		return state;
-	}
-
-
-	public void setState(String state) {
-		this.state = state;
-	}
-
-
-	public String getZipCode() {
-		return zipCode;
-	}
-
-
-	public void setZipCode(String zipCode) {
-		this.zipCode = zipCode;
-	}
-
-
+	
 	public String getCardType() {
 		return cardType;
 	}
@@ -260,6 +213,22 @@ public class User {
     public void removeBooking(Booking booking) {
         booking.setUser(null);
         this.bookings.remove(booking);
+    }
+    public void addAddress(Address address) {
+        addresses.add(address);
+        address.setUserAddress(this);
+    }
+    public void removeAddress(Address address) {
+        address.setUserAddress(null);
+        this.addresses.remove(address);
+    }
+    public void addPaymentInfo(PaymentInfo paymentInfo) {
+        paymentInfos.add(paymentInfo);
+        paymentInfo.setUserPaymentInfo(this);
+    }
+    public void removePaymentInfo(PaymentInfo paymentInfo) {
+        paymentInfo.setUserPaymentInfo(null);
+        this.paymentInfos.remove(paymentInfo);
     }
 	
 }
