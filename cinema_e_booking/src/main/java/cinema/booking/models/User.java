@@ -19,7 +19,6 @@ import javax.validation.constraints.NotNull;
 public class User {
 
 	@Id
-	@NotNull
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer userId;
 	
@@ -34,11 +33,7 @@ public class User {
 	@NotNull
 	private String password;
 	@NotNull
-	private Boolean admin = false;
-	@NotNull
-	private Boolean employee = false;
-	@NotNull
-	private Boolean suspended = false;
+	private Boolean enabled = true;
 	@NotNull
 	private Date birthDate;
 	@OneToMany(cascade = CascadeType.ALL, 
@@ -50,14 +45,11 @@ public class User {
 	@OneToMany(cascade = CascadeType.ALL, 
 	        mappedBy = "userPaymentInfo", orphanRemoval = true)
 	private List<PaymentInfo> paymentInfos = new ArrayList<>();
+	@NotNull
+	private String role;
 	
 	//optional user fields
 	private String phone;
-	private String cardType;
-	private String cardNumber;
-	private String cardExpDateMonth;
-	private String cardExpDateYear;
-	private String cardZip;
 	
 	
 	
@@ -108,33 +100,13 @@ public class User {
 	}
 
 
-	public Boolean getAdmin() {
-		return admin;
+	public Boolean getEnabled() {
+		return enabled;
 	}
 
 
-	public void setAdmin(Boolean admin) {
-		this.admin = admin;
-	}
-
-
-	public Boolean getEmployee() {
-		return employee;
-	}
-
-
-	public void setEmployee(Boolean employee) {
-		this.employee = employee;
-	}
-
-
-	public Boolean getSuspended() {
-		return suspended;
-	}
-
-
-	public void setSuspended(Boolean suspended) {
-		this.suspended = suspended;
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
 	}
 
 
@@ -156,79 +128,81 @@ public class User {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-
 	
-	public String getCardType() {
-		return cardType;
-	}
-
-
-	public void setCardType(String cardType) {
-		this.cardType = cardType;
-	}
-
-
-	public String getCardNumber() {
-		return cardNumber;
-	}
-
-
-	public void setCardNumber(String cardNumber) {
-		this.cardNumber = cardNumber;
-	}
-
-
-	public String getCardExpDateMonth() {
-		return cardExpDateMonth;
-	}
-
-
-	public void setCardExpDateMonth(String cardExpDateMonth) {
-		this.cardExpDateMonth = cardExpDateMonth;
-	}
-
-
-	public String getCardExpDateYear() {
-		return cardExpDateYear;
-	}
-
-
-	public void setCardExpDateYear(String cardExpDateYear) {
-		this.cardExpDateYear = cardExpDateYear;
-	}
-
-
-	public String getCardZip() {
-		return cardZip;
-	}
-
-
-	public void setCardZip(String cardZip) {
-		this.cardZip = cardZip;
-	}
+	
 	public void addBooking(Booking booking) {
         bookings.add(booking);
         booking.setUser(this);
     }
+	
+	
     public void removeBooking(Booking booking) {
         booking.setUser(null);
         this.bookings.remove(booking);
     }
+    
+    
     public void addAddress(Address address) {
         addresses.add(address);
         address.setUserAddress(this);
     }
+    
+    
     public void removeAddress(Address address) {
         address.setUserAddress(null);
         this.addresses.remove(address);
     }
+    
+    
     public void addPaymentInfo(PaymentInfo paymentInfo) {
         paymentInfos.add(paymentInfo);
         paymentInfo.setUserPaymentInfo(this);
     }
+    
+    
     public void removePaymentInfo(PaymentInfo paymentInfo) {
         paymentInfo.setUserPaymentInfo(null);
         this.paymentInfos.remove(paymentInfo);
     }
+    
+    
+	public List<Booking> getBookings() {
+		return bookings;
+	}
+	
+	
+	public void setBookings(List<Booking> bookings) {
+		this.bookings = bookings;
+	}
+	
+	
+	public List<Address> getAddresses() {
+		return addresses;
+	}
+	
+	
+	public void setAddresses(List<Address> addresses) {
+		this.addresses = addresses;
+	}
+	
+	
+	public List<PaymentInfo> getPaymentInfos() {
+		return paymentInfos;
+	}
+	
+	
+	public void setPaymentInfos(List<PaymentInfo> paymentInfos) {
+		this.paymentInfos = paymentInfos;
+	}
+	
+	
+	public String getRole() {
+		return role;
+	}
+	
+	
+	public void setRole(String role) {
+		this.role = role;
+	}
 	
 }

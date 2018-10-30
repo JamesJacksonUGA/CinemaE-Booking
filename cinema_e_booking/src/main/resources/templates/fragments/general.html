@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="en">
+<head>
+
+</head>
+
+<div th:fragment="loginform">
+<div class="login_form">
+            
+    <button th:if="${#httpServletRequest.remoteUser == null}" onclick="document.getElementById('loginform').style.display='block'" style="width:auto;" class="loginbutton">Sign In</button>
+    <form th:if="${#httpServletRequest.remoteUser != null}" th:action="@{/logout}" method="post">
+  		<input type="submit" value="Log out" style="width:auto;" class="loginbutton"/>
+	</form>
+    <div class="registerCon">
+    <form th:if="${#httpServletRequest.remoteUser == null}" th:action="@{/registration}" method="get">
+        <input type="submit" value="Register"/>
+    </form>
+    </div>
+      
+    <div id="loginform" class="modal">
+    
+      <form class="modal-content animate" th:action="@{/login}" method="post">
+         <div class="imgcontainer">
+            <span onclick="document.getElementById('loginform').style.display='none'" class="close" title="Close Modal">&times;</span>
+         </div>
+         <div class="container">
+            <label for="username" class="sr-only"><b>Username</b></label>    
+            <input type="email" id="username"  name="username" class="form-control" placeholder="Email" required autofocus>
+            <br>
+            <label for="password"><b>Password</b></label>
+			<input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+            <br>
+            <button type="submit">Login</button>
+            <label>
+            	<input type="checkbox" checked="checked" name="remember"> Remember me
+             </label>
+          </div>
+          
+          <div class="container" style="background-color:#f1f1f1">
+              <button type="button" onclick="document.getElementById('loginform').style.display='none'" class="cancelbtn">Cancel</button>
+              <span class="psw">Forgot <a href="#">password?</a></span>
+          </div>
+
+      </form>            
+    </div>
+</div>
+</div>
+<!-- End loginform -->
+    
+    
+    
+</html>    

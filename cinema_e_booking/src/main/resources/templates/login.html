@@ -23,7 +23,7 @@
       <div class="alert alert-danger" role="alert" th:if="${param.error}">Invalid email or password.</div>
       <div class="alert alert-success" role="alert" th:if="${param.logout}">You have been logged out.</div>
    	  <label for="username" class="sr-only">Username</label>
-   	  <input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus>
+   	  <input type="email" id="username" name="username" class="form-control" placeholder="Email" required autofocus>
       <label for="password" class="sr-only">Password</label>
       <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
       <div class="checkbox mb-3">

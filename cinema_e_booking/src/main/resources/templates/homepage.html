@@ -12,57 +12,45 @@
 <body class="text-center">
     
 <div class="header">
-    <h1>Athen's Tickets</h1>
+    <h1>Athens Tickets</h1>
 </div>    
     
 <div class="topnav sticky">
+
+	<!-- Pages for all users and admins -->
     <a href="/home" style="background-color: red">Home</a>
     <a href="/movies">Movies</a>
     <a href="#">Showtimes</a>
+    
+    <!-- Pages for Admin -->
+    <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Movies</a>
+    <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Showtimes</a>
+    <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Halls</a>
+    <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Users</a>
+    <a sec:authorize="hasAuthority('ADMIN')" href="#" >View Reports</a>
+        
+    <!-- Page for Registered User -->
+    <a sec:authorize="hasAuthority('USER')" href="#">Profile</a>
+    
     <div class="search-container">
         <form action="/action_page.php">
             <input type="text" id="searchBar" placeholder="Search for movie">
             <button type="submit">Submit</button>
         </form>
     </div>
-    <div class="login_form">
-            
-        <button onclick="document.getElementById('loginform').style.display='block'" style="width:auto;" class="loginbutton">Sign In</button>
-        <div class="registerCon">
-        <form action="registration.html">
-            <input type="submit" value="Register"/>
-        </form>
-        </div>
-        
-        <div id="loginform" class="modal">
-        
-            <form class="modal-content animate" action="/action_page.php">
-                <div class="imgcontainer">
-                <span onclick="document.getElementById('loginform').style.display='none'" class="close" title="Close Modal">&times;</span>
-                </div>
-                <div class="container">
-                    <label for="emailN"><b>Email</b></label>    
-                    <input type="email" placeholder="Enter Username" name="emailN" required>
-                    <br>
-                    <label for="psw"><b>Password</b></label>
-                    <input type="password" placeholder="Enter Password" name="psw" required>
-                    <br>
-                    <button type="submit">Login</button>
-                    <label>
-                        <input type="checkbox" checked="checked" name="remember"> Remember me
-                    </label>
-                </div>
-                
-                <div class="container" style="background-color:#f1f1f1">
-                    <button type="button" onclick="document.getElementById('loginform').style.display='none'" class="cancelbtn">Cancel</button>
-                    <span class="psw">Forgot <a href="#">password?</a></span>
-                </div>
- 
-            </form>            
-        </div>
-    </div>
-</div>
     
+    <div th:insert="fragments/general.html :: loginform"></div>
+</div>
+
+<div th:if="${#httpServletRequest.remoteUser == null}">
+	<div class="alert alert-success" role="alert" th:if="${param.logout}">You have been logged out.</div>
+</div>
+
+<div th:if="${#httpServletRequest.remoteUser != null}">
+    <p th:text="${#httpServletRequest.remoteUser}">
+      user_email
+    </p>
+</div>   
     
 </body>
     

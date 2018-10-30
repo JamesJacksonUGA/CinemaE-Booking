@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+	<title>Registration</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link href="css/homepagestyle.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="../static/bootstrap/css/bootstrap.css" th:href="@{/bootstrap/css/bootstrap.css}"/>
+
+	<!-- Custom styles for this template -->
+    <link href="album.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+
+<div class="header">
+    <h1>Athens Tickets</h1>
+</div>    
+    
+<div class="topnav sticky">
+    
+    <!-- Pages for all users and admins -->
+    <a href="/home">Home</a>
+    <a href="/movies">Movies</a>
+    <a href="#">Showtimes</a>
+    
+    <!-- Pages for Admin -->
+    <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Movies</a>
+    <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Showtimes</a>
+    <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Halls</a>
+    <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Users</a>
+    <a sec:authorize="hasAuthority('ADMIN')" href="#" >View Reports</a>
+        
+    <!-- Page for Registered User -->
+    <a sec:authorize="hasAuthority('USER')" href="#">Profile</a>
+    
+    <div class="search-container">
+        <form action="/action_page.php">
+            <input type="text" placeholder="Search for movie">
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    
+    <div th:insert="fragments/general.html :: loginform"></div>
+</div>
+
+
+<div class="container">
+  <div class="py-5 text-center">
+    <h2>Create an account with us!</h2>
+    <p class="lead">Register for a free user account to start booking tickets today.</p>
+    <p>Already have an account? <a href="/login">Sign in here</a></p>
+  </div>
+
+  <div class="row">
+    <div class="col-md order-md-1">
+      <form class="needs-validation" novalidate action="#" th:action="@{/registration}" th:object="${newUser}" method="post">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="firstName">First name</label>
+            <input type="text" th:field="*{firstName}" class="form-control" id="firstName" placeholder="John" value="" required>
+            <div class="invalid-feedback">
+              Valid first name is required.
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="lastName">Last name</label>
+            <input type="text" th:field="*{lastName}" class="form-control" id="lastName" placeholder="Doe" value="" required>
+            <div class="invalid-feedback">
+              Valid last name is required.
+            </div>
+          </div>
+        </div>
+ 
+        <div class="mb-3">
+          <label for="email">Email</label>
+          <input type="email" th:field="*{email}" class="form-control" id="email" placeholder="you@example.com">
+          <div class="invalid-feedback">
+            Please enter a valid email address.
+          </div>
+        </div>
+        
+        <div class="mb-3">
+          <label for="password">Password</label>
+          <div class="input-group">
+            <input type="password" th:field="*{password}" class="form-control" id="password" placeholder="Password" required>
+            <div class="invalid-feedback" style="width: 100%;">
+              Your password is required.
+            </div>
+          </div>
+        </div>
+        
+        <div class="mb-3">
+          <label for="birthDate">Birth date</label>
+          <div class="input-group">
+            <input type="date" th:field="*{birthDate}" class="form-control" id="birthDate" placeholder="01/22/1990" required>
+            <div class="invalid-feedback" style="width: 100%;">
+              Your birth date is required.
+            </div>
+          </div>
+        </div>
+        
+        <div class="mb-3">
+          <label for="phone">Phone <span class="text-muted">(Optional)</span></label>
+          <input type="text" th:field="*{phone}" class="form-control" id="phone" placeholder="Phone" data-format="+1 (ddd) ddd-dddd">
+        </div>
+        
+        <hr class="mb-4">
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Create your account</button>
+      </form>
+    </div>
+  </div>
+
+  <footer class="my-5 pt-5 text-muted text-center text-small">
+    <p class="mb-1">&copy; Athens Ticket's Limited</p>
+  </footer>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+<script src="../../assets/js/vendor/popper.min.js"></script>
+<script src="../../dist/js/bootstrap.min.js"></script>
+<script src="../../assets/js/vendor/holder.min.js"></script>
+<script>
+  (function() {
+    'use strict';
+
+    window.addEventListener('load', function() {
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.getElementsByClassName('needs-validation');
+
+      // Loop over them and prevent submission
+      var validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    }, false);
+  })();
+</script>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+</body>
+</html>

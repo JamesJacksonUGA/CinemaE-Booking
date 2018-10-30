@@ -4,11 +4,12 @@
 <head>
 	<title>Browse Movies</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	
+	<!-- Custom styles for this template -->
+    <link href="album.css" type="text/css">
 	<link href="css/homepagestyle.css" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" href="../static/bootstrap/css/bootstrap.css" th:href="@{/bootstrap/css/bootstrap.css}"/>
 
-	<!-- Custom styles for this template -->
-    <link href="album.css" rel="stylesheet">
 </head>
 <body>
 
@@ -18,54 +19,31 @@
 </div>    
     
 <div class="topnav sticky">
+    
+    <!-- Pages for all users and admins -->
     <a href="/home">Home</a>
-    <a href="/movies" style="background-color: red" >Movies</a>
+    <a href="/movies" style="background-color: red">Movies</a>
     <a href="#">Showtimes</a>
+    
+    <!-- Pages for Admin -->
+    <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Movies</a>
+    <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Showtimes</a>
+    <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Halls</a>
+    <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Users</a>
+    <a sec:authorize="hasAuthority('ADMIN')" href="#" >View Reports</a>
+        
+    <!-- Page for Registered User -->
+    <a sec:authorize="hasAuthority('USER')" href="#">Profile</a>
+    
     <div class="search-container">
         <form action="/action_page.php">
-            <input type="text" placeholder="Search for movie">
+            <input type="text" id="searchBar" placeholder="Search for movie">
             <button type="submit">Submit</button>
         </form>
     </div>
-    <div class="login_form">
-            
-        <button onclick="document.getElementById('loginform').style.display='block'" style="width:auto;" class="loginbutton">Sign In</button>
-        <div class="registerCon">
-        <form action="registration.html">
-            <input type="submit" value="Register"/>
-        </form>
-        </div>
-        
-        <div id="loginform" class="modal">
-        
-            <form class="modal-content animate" action="/action_page.php">
-                <div class="imgcontainer">
-                <span onclick="document.getElementById('loginform').style.display='none'" class="close" title="Close Modal">&times;</span>
-                </div>
-                <div class="container">
-                    <label for="emailN"><b>Email</b></label>    
-                    <input type="email" placeholder="Enter Username" name="emailN" required>
-                    <br>
-                    <label for="psw"><b>Password</b></label>
-                    <input type="password" placeholder="Enter Password" name="psw" required>
-                    <br>
-                    <button type="submit">Login</button>
-                    <label>
-                        <input type="checkbox" checked="checked" name="remember"> Remember me
-                    </label>
-                </div>
-                
-                <div class="container" style="background-color:#f1f1f1">
-                    <button type="button" onclick="document.getElementById('loginform').style.display='none'" class="cancelbtn">Cancel</button>
-                    <span class="psw">Forgot <a href="#">password?</a></span>
-                </div>
- 
-            </form>            
-        </div>
-    </div>
+    
+    <div th:insert="fragments/general.html :: loginform"></div>
 </div>
-
-
 
 <main role="main">
 
