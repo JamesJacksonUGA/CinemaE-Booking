@@ -47,6 +47,8 @@ public class User {
 	private List<PaymentInfo> paymentInfos = new ArrayList<>();
 	@NotNull
 	private String role;
+	@NotNull
+	private String code;
 	
 	//optional user fields
 	private String phone;
@@ -203,6 +205,15 @@ public class User {
 	
 	public void setRole(String role) {
 		this.role = role;
+	}
+	
+	public String getCode() {
+		return code;
+	}
+	
+	
+	public void setCode(String code) {
+		this.code = code;
 	}
 	
 }

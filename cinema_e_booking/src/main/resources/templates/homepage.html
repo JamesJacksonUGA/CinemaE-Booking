@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="en">
 <head>
     <title>Athens Tickets</title>
-    <link href="css/homepagestyle.css" rel="stylesheet" type="text/css">
+    <link href="/css/homepagestyle.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.css" th:href="@{/bootstrap/css/bootstrap.css}"/>
 
     <meta charset="utf-8">
@@ -45,6 +45,10 @@
 <div th:if="${#httpServletRequest.remoteUser == null}">
 	<div class="alert alert-success" role="alert" th:if="${param.logout}">You have been logged out.</div>
 </div>
+
+<div class="alert alert-success" role="success" th:if="${activated} == 'true'">Your account has been activated. You may now sign in.</div>
+<div class="alert alert-success" role="success" th:if="${registered} == 'true'">Thank you for registering. Please check your email to activate your account.</div>
+
 
 <div th:if="${#httpServletRequest.remoteUser != null}">
     <p th:text="${#httpServletRequest.remoteUser}">

@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import cinema.booking.models.User;
 import cinema.booking.repositories.UserRepository;
@@ -38,4 +39,14 @@ public class UserService {
 	public void deleteUserById(Integer userId) {
 		userRepository.deleteById(userId);
 	}
+	
+	public String findCodeByUserId(Integer userId) {
+		return userRepository.findCodeByUserId(userId);
+	}
+	
+	@Transactional
+	public void setEnabledByUserId(Integer userId) {
+		userRepository.setEnabledByUserId(userId);
+	}
+	
 }
