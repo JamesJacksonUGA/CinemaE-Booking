@@ -9,7 +9,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 
@@ -23,7 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
 		
-	  auth.jdbcAuthentication().passwordEncoder(NoOpPasswordEncoder.getInstance()).dataSource(dataSource)
+	  auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(passwordEncoder())
 		.usersByUsernameQuery(
 				"select email, password, enabled from user where email=?")
 		.authoritiesByUsernameQuery(
@@ -37,6 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .authorizeRequests()
             .antMatchers(
             		"/", "/home", "/homepage", "/movies", "/comingSoon", "/registration", "/registrationConfirmation/**",
+            		"/movieDetails/**",
             		"/bootstrap/**", "/css/**", "/images/**", "/activate/**",
             		 "/js/**", "/dist/**", "/album.css",
                      "/img/**",
@@ -64,6 +66,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	    SimpleUrlAuthenticationSuccessHandler handler = new SimpleUrlAuthenticationSuccessHandler();
 	    handler.setUseReferer(true);
 	    return handler;
+	}
+	
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+	    return new BCryptPasswordEncoder();
 	}
 
 }

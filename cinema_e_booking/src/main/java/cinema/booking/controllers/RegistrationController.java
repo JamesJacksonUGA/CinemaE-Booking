@@ -3,7 +3,9 @@ package cinema.booking.controllers;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,11 +21,17 @@ import cinema.booking.services.UserService;
 @Controller
 public class RegistrationController {
 		
+	@Value("${server.port}")
+	String port;
+	
 	@Autowired
 	private UserService userService;
 	
 	@Autowired
 	private MailService mailService;
+	
+	@Autowired
+	private PasswordEncoder encoder;
 	
 	@GetMapping(value="/registration")
 	public String registrationPage(Model model) {
@@ -42,6 +50,7 @@ public class RegistrationController {
 		
 		newUser.setRole("USER");
 		newUser.setEnabled(false);
+		newUser.setPassword(encoder.encode(newUser.getPassword()));
 		
 		String code = Long.toHexString(Double.doubleToLongBits(Math.random()));
 		newUser.setCode(code);
@@ -49,7 +58,7 @@ public class RegistrationController {
 		
 		String subject = "Athens Tickets Account Verification";
 		String text = "In order to validate your account, please click the link and enter the following code: \n" + code
-				+ "\nhttp://localhost:8080/registrationConfirmation/" + newUser.getUserId();
+				+ "\nhttp://localhost:" + port + "/registrationConfirmation/" + newUser.getUserId();
 		
 		try {
 			mailService.sendSimpleMessage(newUser.getEmail(), subject, text);
