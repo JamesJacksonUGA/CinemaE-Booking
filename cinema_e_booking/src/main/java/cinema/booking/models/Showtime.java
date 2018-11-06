@@ -41,6 +41,9 @@ public class Showtime {
 	@OneToMany(cascade = CascadeType.ALL, 
 	        mappedBy = "showtime", orphanRemoval = true)
 	private List<Seat> seats = new ArrayList<>();
+	@OneToMany(cascade = CascadeType.ALL, 
+	        mappedBy = "showtime", orphanRemoval = true)
+	private List<Booking> bookings = new ArrayList<>();
 	
 	
 	

@@ -10,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -30,10 +29,14 @@ public class Booking {
 	@OneToMany(cascade = CascadeType.ALL, 
 	        mappedBy = "booking", orphanRemoval = true)
 	@JsonManagedReference
-	private List<Seat> seats = new ArrayList<>();
-	@OneToOne
-    private Payment payment;
-	
+	private List<Ticket> tickets = new ArrayList<>();
+	@ManyToOne
+    private Promotion promotion;
+	@NotNull
+	@ManyToOne
+	private Showtime showtime;
+	@NotNull
+	private Integer cc_num;
 	
 	
 	public Booking() {
@@ -51,25 +54,32 @@ public class Booking {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	public void addSeat(Seat seat) {
-        seats.add(seat);
-        seat.setBooking(this);
+	public void addTicket(Ticket ticket) {
+        tickets.add(ticket);
+        ticket.setBooking(this);
     }
-    public void removeSeat(Seat seat) {
-        seat.setBooking(null);
-        this.seats.remove(seat);
+    public void removeTicket(Ticket ticket) {
+        ticket.setBooking(null);
+        this.tickets.remove(ticket);
     }
-	public List<Seat> getSeats() {
-		return seats;
+	public List<Ticket> getTickets() {
+		return tickets;
 	}
-	public void setSeats(List<Seat> seats) {
-		this.seats = seats;
+	public void setTickets(List<Ticket> tickets) {
+		this.tickets = tickets;
 	}
-	public Payment getPayment() {
-		return payment;
+	public Promotion getPromotion() {
+		return promotion;
 	}
-	public void setPayment(Payment payment) {
-		this.payment = payment;
+	public void setPromotion(Promotion promotion) {
+		this.promotion = promotion;
 	}
+	public Showtime getShowtime() {
+		return showtime;
+	}
+	public void setShowtime(Showtime showtime) {
+		this.showtime = showtime;
+	}
+
 	
 }

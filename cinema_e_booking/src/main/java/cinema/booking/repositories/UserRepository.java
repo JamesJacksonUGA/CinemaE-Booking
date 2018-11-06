@@ -15,4 +15,8 @@ public interface UserRepository extends CrudRepository<User, Integer> {
 	@Modifying
 	@Query("UPDATE User SET enabled = true WHERE userId = :id")
 	void setEnabledByUserId(@Param("id") Integer userId);
+	
+	@Query("SELECT email FROM User where email = :email") 
+    String findEmail(@Param("email") String email);
+	
 }

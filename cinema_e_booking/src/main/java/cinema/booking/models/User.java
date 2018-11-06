@@ -35,6 +35,8 @@ public class User {
 	@NotNull
 	private Boolean enabled = true;
 	@NotNull
+	private Boolean active;
+	@NotNull
 	private Date birthDate;
 	@OneToMany(cascade = CascadeType.ALL, 
 	        mappedBy = "user", orphanRemoval = true)
@@ -109,6 +111,15 @@ public class User {
 
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
+	}
+	
+	public Boolean getActive() {
+		return active;
+	}
+
+
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
 
 

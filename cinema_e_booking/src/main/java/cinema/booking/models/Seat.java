@@ -19,6 +19,8 @@ public class Seat {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer seatId;
 	@NotNull
+	private Integer seatNo;
+	@NotNull
 	private char rowLetter;
 	@NotNull
 	private Integer colNumber;
@@ -70,6 +72,12 @@ public class Seat {
 	}
 	public void setBooking(Booking booking) {
 		this.booking = booking;
+	}
+	public Integer getSeatNo() {
+		return seatNo;
+	}
+	public void setSeatNo(Integer seatNo) {
+		this.seatNo = seatNo;
 	}
 	
 }

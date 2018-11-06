@@ -49,4 +49,8 @@ public class UserService {
 		userRepository.setEnabledByUserId(userId);
 	}
 	
+	public Boolean duplicateEmail(String email) {
+		return userRepository.findEmail(email) != null;
+	}
+	
 }

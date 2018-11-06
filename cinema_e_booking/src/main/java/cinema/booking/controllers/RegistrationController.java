@@ -54,7 +54,18 @@ public class RegistrationController {
 		
 		String code = Long.toHexString(Double.doubleToLongBits(Math.random()));
 		newUser.setCode(code);
-		userService.addUser(newUser);
+		newUser.setActive(true);
+		
+		//make sure this email doesn't already have an account
+		if (userService.duplicateEmail(newUser.getEmail()) == false) {
+			userService.addUser(newUser);
+		}
+		else {
+			model.addAttribute("duplicateEmail", "true");
+			model.addAttribute("email", newUser.getEmail());
+			model.addAttribute("newUser", new User());
+			return "registration";
+		}
 		
 		String subject = "Athens Tickets Account Verification";
 		String text = "In order to validate your account, please click the link and enter the following code: \n" + code

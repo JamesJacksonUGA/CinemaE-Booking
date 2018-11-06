@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -36,7 +37,7 @@ public class Promotion {
 	@OneToMany(cascade = CascadeType.ALL, 
 	        mappedBy = "promotion", orphanRemoval = true)
 	@JsonManagedReference
-	private List<Payment> payments = new ArrayList<>();
+	private List<Booking> bookings = new ArrayList<>();
 	
 	
 	
@@ -70,20 +71,6 @@ public class Promotion {
 	public void setPercentOff(Integer percentOff) {
 		this.percentOff = percentOff;
 	}
-	public List<Payment> getPayments() {
-		return payments;
-	}
-	public void setPayments(List<Payment> payments) {
-		this.payments = payments;
-	}
-	public void addPayment(Payment payment) {
-        payments.add(payment);
-        payment.setPromotion(this);
-    }
-    public void removePayment(Payment payment) {
-        payment.setPromotion(null);
-        this.payments.remove(payment);
-    }
 	
 }
 

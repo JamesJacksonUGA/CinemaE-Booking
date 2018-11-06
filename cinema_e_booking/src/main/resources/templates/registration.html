@@ -44,6 +44,11 @@
 </div>
 
 
+<div class="alert alert-danger alert-dismissible mb-0" id="alert" role="danger" th:if="${duplicateEmail} == 'true'">
+	There is already an account registered with the email <span th:text="${email}"></span> Please login or try again.
+</div>
+
+
 <div class="container">
   <div class="py-5 text-center">
     <h2>Create an account with us!</h2>
@@ -53,7 +58,7 @@
 
   <div class="row">
     <div class="col-md order-md-1">
-      <form class="needs-validation" novalidate action="#" th:action="@{/registration}" th:object="${newUser}" method="post">
+      <form id="userInfo" class="needs-validation" novalidate action="#" th:action="@{/registration}" th:object="${newUser}" method="post">
         <div class="row">
           <div class="col-md-6 mb-3">
             <label for="firstName">First name</label>
