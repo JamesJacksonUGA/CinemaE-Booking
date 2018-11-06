@@ -51,6 +51,8 @@ public class User {
 	private String role;
 	@NotNull
 	private String code;
+	@NotNull
+	private Boolean recievePromotions = false;
 	
 	//optional user fields
 	private String phone;
@@ -226,5 +228,14 @@ public class User {
 	public void setCode(String code) {
 		this.code = code;
 	}
+	
+	public Boolean getRecievePromotions() {
+		return recievePromotions;
+	}
+	
+	public void setRecievePromotions(Boolean recievePromotions) {
+		this.recievePromotions = recievePromotions;
+	}
+	
 	
 }

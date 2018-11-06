@@ -112,6 +112,13 @@
           <input type="text" th:field="*{phone}" class="form-control" id="phone" placeholder="Phone" data-format="+1 (ddd) ddd-dddd">
         </div>
         
+        <div class="mb-3 form-check">
+		  <input class="form-check-input" th:field="*{recievePromotions}" type="checkbox" value="" id="recievePromotions">
+		  <label class="form-check-label" for="recievePromotions">
+		    Stay up to date on our latest news and promotions
+		  </label>
+		</div>
+        
         <hr class="mb-4">
         <button class="btn btn-primary btn-lg btn-block" type="submit">Create your account</button>
       </form>
