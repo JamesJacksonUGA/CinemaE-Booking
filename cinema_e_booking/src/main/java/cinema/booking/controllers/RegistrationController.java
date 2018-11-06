@@ -76,6 +76,9 @@ public class RegistrationController {
 		}
 		catch (MailException e) {
 			System.out.println("Could not send message");
+			
+			model.addAttribute("failedToSend", "true");
+			return "registration";
 		}
 		
 		model.addAttribute("newUser", newUser);

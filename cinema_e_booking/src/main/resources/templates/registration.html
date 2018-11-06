@@ -56,6 +56,9 @@
     <p>Already have an account? <a href="/login">Sign in here</a></p>
   </div>
 
+<div class="alert alert-danger" role="alert" th:if="${failedToSend} == 'true'">We were unable to send an email to the specified address. 
+      Please make sure the address is correct and try again.</div>
+
   <div class="row">
     <div class="col-md order-md-1">
       <form id="userInfo" class="needs-validation" novalidate action="#" th:action="@{/registration}" th:object="${newUser}" method="post">
