@@ -75,7 +75,7 @@
               <p class="card-text" th:text="${movie.synopsis}"></p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <a class="btn btn-sm btn-outline-secondary" href="#" role="button">View showtimes</a>
+                  <a class="btn btn-sm btn-outline-secondary" th:href="@{'/book/' + ${movie.movieId}}" role="button">Get tickets</a>
                   <a class="btn btn-sm btn-outline-secondary" th:href="@{'/movieDetails/' + ${movie.movieId}}" role="button">Details</a>
                 </div>
                 <small class="text-muted" th:text="${movie.length} + ' minutes'">Movie Length</small>
