@@ -12,6 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 
 @Entity
 @Table(name="movie")
@@ -38,9 +40,14 @@ public class Movie {
 	private Boolean comingSoon=false;
 	@OneToMany(cascade = CascadeType.ALL, 
 	        mappedBy = "movie", orphanRemoval = true)
+	@JsonBackReference
 	private List<Showtime> showtimes = new ArrayList<>();
 	@NotNull
 	private Integer length;
+	@OneToMany(cascade = CascadeType.ALL, 
+	        mappedBy = "movie", orphanRemoval = true)
+	@JsonBackReference
+	private List<TheaterMovie> theaterMovies = new ArrayList<>();
 	
 	
 	
@@ -138,6 +145,18 @@ public class Movie {
 	}
 	public void setLength(Integer length) {
 		this.length = length;
+	}
+	public List<Showtime> getShowtimes() {
+		return showtimes;
+	}
+	public void setShowtimes(List<Showtime> showtimes) {
+		this.showtimes = showtimes;
+	}
+	public List<TheaterMovie> getTheaterMovies() {
+		return theaterMovies;
+	}
+	public void setTheaterMovies(List<TheaterMovie> theaterMovies) {
+		this.theaterMovies = theaterMovies;
 	}
     
 	

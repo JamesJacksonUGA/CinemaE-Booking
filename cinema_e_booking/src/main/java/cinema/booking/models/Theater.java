@@ -31,6 +31,10 @@ public class Theater {
 	        mappedBy = "theater", orphanRemoval = true)
 	@JsonBackReference
 	private List<Showtime> showtimes = new ArrayList<>();
+	@OneToMany(cascade = CascadeType.ALL, 
+	        mappedBy = "theater", orphanRemoval = true)
+	@JsonBackReference
+	private List<TheaterMovie> theaterMovies = new ArrayList<>();
 	
 	
 	
@@ -81,5 +85,12 @@ public class Theater {
 	public void setShowtimes(List<Showtime> showtimes) {
 		this.showtimes = showtimes;
 	}
+	public List<TheaterMovie> getTheaterMovies() {
+		return theaterMovies;
+	}
+	public void setTheaterMovies(List<TheaterMovie> theaterMovies) {
+		this.theaterMovies = theaterMovies;
+	}
+	
     
 }
