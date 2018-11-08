@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="en">
+<head>
+    <title>Athens Tickets</title>
+    <link href="/css/carousel.css" rel="stylesheet">
+    <link href="/css/homepagestyle.css" rel="stylesheet" type="text/css">
+    <link href="/css/form-basic.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.css" th:href="@{/bootstrap/css/bootstrap.css}"/>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+    
+    
+<body>
+
+<div class="header">
+    <h1>Athens Tickets</h1>
+</div>    
+    
+<div class="topnav sticky">
+
+	<!-- Pages for all users and admins -->
+    <a href="/home" style="background-color: red">Home</a>
+    <a href="/movies">Movies</a>
+    <a href="#">Showtimes</a>
+    
+    <!-- Pages for Admin -->
+    <a sec:authorize="hasAuthority('ADMIN')" href="/manageMovies">Manage Movies</a>
+    <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Showtimes</a>
+    <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Halls</a>
+    <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Users</a>
+    <a sec:authorize="hasAuthority('ADMIN')" href="#" >View Reports</a>
+        
+    <!-- Page for Registered User -->
+    <a sec:authorize="hasAuthority('USER')" href="/userProfile">Profile</a>
+    
+    <div class="search-container">
+        <form action="/action_page.php">
+            <input type="text" id="searchBar" placeholder="Search for movie">
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    
+    <div th:insert="fragments/general.html :: loginform"></div>
+</div>
+
+<div class="main-content">
+	
+	<form class="form-basic" method="post" action='#'>
+		
+		<div class="form-title-row">
+			<h1>Add Movie</h1>	
+		</div>
+		
+		<div class="form-row">
+			<label>
+				<span>Movie Title</span>
+				<input type="text" name="title">
+			</label>
+		</div>
+		
+		<div class="form-row">
+			<label>
+				<span>Director(s)</span>
+				<input type="text" name="director">
+			</label>
+		</div>
+		
+		<div class="form-row">
+			<label>
+				<span>Cast</span>
+				<input type="text" name="cast">
+			</label>
+		</div>
+		
+		<div class="form-row">
+			<label>
+				<span>Category</span>
+				<input type="text" name="category">
+			</label>
+		</div>
+		
+		<div class="form-row">
+			<label>
+				<span>Producer</span>
+				<input type="text" name="producer">
+			</label>
+		</div>
+		
+		<div class="form-row">
+			<label>
+				<span>Synopsis</span>
+				<textarea name="synopsis">Movie description...</textarea>
+			</label>
+		</div>
+		
+		<div class="form-row">
+			<label>
+				<span>Length in mins</span>
+				<input type="number" name="length">
+			</label>
+		</div>
+		
+		<div class="form-row">
+			<label>
+				<span>Rating</span>
+					<select name="ratings">
+  						<option value="g">G - General Audiences</option>
+  						<option value="pg">PG – Parental Guidance Suggested</option>
+  						<option value="pg-13">PG-13 – Parents Strongly Cautioned</option>
+  						<option value="r">R – Restricted</option>
+  						<option value="nc-17">NC-17 – Adults Only</option>
+					</select>
+			</label>
+		</div>
+		
+		<div class="form-row">
+			<label>
+				<span>Upload a poster</span>
+				<input type="file" name="poster">
+			</label>
+		</div>
+		
+		<div class="form-row">
+			<button type="submit">Submit Movie</button>
+		</div>
+	</form>
+
+</div>
+
+
+   
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+</body>
+    
+</html>
+
+
+
