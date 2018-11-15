@@ -20,7 +20,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 public class Movie {
 	
 	@Id
-	@NotNull
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer movieId;
 	@NotNull

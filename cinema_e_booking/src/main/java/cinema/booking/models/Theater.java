@@ -19,7 +19,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 public class Theater {
 
 	@Id
-	@NotNull
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer theaterId;
 	@NotNull
