@@ -21,12 +21,12 @@
 <div class="topnav sticky">
 
 	<!-- Pages for all users and admins -->
-    <a href="/home" style="background-color: red">Home</a>
+    <a href="/home">Home</a>
     <a href="/movies">Movies</a>
     <a href="#">Showtimes</a>
     
     <!-- Pages for Admin -->
-    <a sec:authorize="hasAuthority('ADMIN')" href="/manageMovies">Manage Movies</a>
+    <a sec:authorize="hasAuthority('ADMIN')" href="/manageMovies" style="background-color: red">Manage Movies</a>
     <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Showtimes</a>
     <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Halls</a>
     <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Users</a>

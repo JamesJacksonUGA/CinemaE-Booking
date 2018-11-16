@@ -17,7 +17,7 @@ public class MovieDetailsController {
 	@RequestMapping(value= {"/movieDetails/{movie_id}"})
 	public String movieDetails(@PathVariable("movie_id") Integer movie_id, Model model) {
 		
-		movieService.getMovieById(movie_id).ifPresent(o -> model.addAttribute("movie", o));
+		movieService.getMovieById(movie_id).ifPresent(o -> model.addAttribute("movies", o));
 	
 		return "movieDetails";
 	}
