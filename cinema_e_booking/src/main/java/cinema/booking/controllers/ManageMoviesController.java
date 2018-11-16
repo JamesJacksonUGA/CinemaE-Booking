@@ -5,12 +5,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,6 +58,12 @@ public class ManageMoviesController {
 			
 			newMovie.setPicture(file.getOriginalFilename());
 		}
+		
+		
+		//alter the youtube trailer link to be the embedded version
+		String trailer = newMovie.getVideo().replace("watch?v=", "embed/");
+		newMovie.setVideo(trailer);
+		
 		
 		//make sure the movie is either now playing or coming soon, not both
 		if (newMovie.getNowPlaying() == true) {

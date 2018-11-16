@@ -7,6 +7,8 @@
 	<link href="/css/userProfile.css" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" href="/../static/bootstrap/css/bootstrap.css" th:href="@{/bootstrap/css/bootstrap.css}"/>
 	
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	
 </head>
 <body>
 
@@ -50,6 +52,7 @@
 		You have been logged out.
 	</div>
 </div>
+
 <div class="editProfile">
 <div class="section">
 <button class="accordion"><h2>Basic Information</h2></button>
@@ -116,14 +119,8 @@ for (i = 0; i < acc.length; i++) {
         this.nextElementSibling.classList.toggle("show");
     }
 }
+
 </script>
-
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-
-
 
 </body>
 

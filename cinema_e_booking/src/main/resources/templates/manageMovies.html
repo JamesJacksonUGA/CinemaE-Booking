@@ -30,7 +30,6 @@
     <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Showtimes</a>
     <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Halls</a>
     <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Users</a>
-    <a sec:authorize="hasAuthority('ADMIN')" href="#" >View Reports</a>
         
     <!-- Page for Registered User -->
     <a sec:authorize="hasAuthority('USER')" href="/userProfile">Profile</a>
@@ -140,6 +139,14 @@
 				<span>Upload a poster</span>
 				<input type="file" name="poster" id="poster">
 			</label>
+		</div>
+		
+		<div class="form-row">
+			<label>
+				<span>Trailer (input youtube URL)</span>
+			</label>
+			
+		    <input type="text" th:field="*{video}" class="form-control" id="video" placeholder="" value="">
 		</div>
 		
 		<div class="custom-control custom-checkbox">
