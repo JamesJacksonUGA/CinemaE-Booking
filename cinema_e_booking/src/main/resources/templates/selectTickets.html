@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="en">
+<head>
+    <title>Athens Tickets</title>
+    <link href="/css/carousel.css" rel="stylesheet">
+    <link href="/css/homepagestyle.css" rel="stylesheet" type="text/css">
+    <link href="/css/form-basic.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.css" th:href="@{/bootstrap/css/bootstrap.css}"/>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+    
+    
+<body>
+
+<div class="header">
+    <h1>Athens Tickets</h1>
+</div>    
+    
+<div class="topnav sticky">
+
+	<!-- Pages for all users and admins -->
+    <a href="/home" style="background-color: red">Home</a>
+    <a href="/movies">Movies</a>
+    <a href="#">Showtimes</a>
+    
+    <!-- Pages for Admin -->
+    <a sec:authorize="hasAuthority('ADMIN')" href="/manageMovies">Manage Movies</a>
+    <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Showtimes</a>
+    <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Halls</a>
+    <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Users</a>
+    <a sec:authorize="hasAuthority('ADMIN')" href="#" >View Reports</a>
+        
+    <!-- Page for Registered User -->
+    <a sec:authorize="hasAuthority('USER')" href="/userProfile">Profile</a>
+    
+    <div class="search-container">
+        <form action="/action_page.php">
+            <input type="text" id="searchBar" placeholder="Search for movie">
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    
+    <div th:insert="fragments/general.html :: loginform"></div>
+</div>
+
+
+<div th:if="${#httpServletRequest.remoteUser == null}">
+	<div class="alert alert-success alert-dismissible mb-0" role="alert" th:if="${param.logout}">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		You have been logged out.
+	</div>
+</div>
+<div class="alert alert-success alert-dismissible mb-0" id="alert" role="success" th:if="${activated} == 'true'">
+	<button type="button" class="close" data-dismiss="alert">&times;</button>
+	Your account has been activated. You may now sign in.
+</div>
+<div class="alert alert-success alert-dismissible mb-0" id="alert" role="success" th:if="${registered} == 'true'">
+	<button type="button" class="close" data-dismiss="alert">&times;</button>
+	Thank you for registering. Please check your email to activate your account.
+</div>
+<div class="alert alert-success alert-dismissible mb-0" id="alert" role="success" th:if="${forgotPasswordEmail} == 'true'">
+	<button type="button" class="close" data-dismiss="alert">&times;</button>
+	You have been sent an email with instructions on resetting your password.
+</div>
+<div class="alert alert-success alert-dismissible mb-0" id="alert" role="success" th:if="${passwordChanged} == 'true'">
+	<button type="button" class="close" data-dismiss="alert">&times;</button>
+	You have succesfully changed your password.
+</div>
+
+   
+<main role="main">
+
+<div class="main-content">
+   
+    <form class="form-basic" action="#" method="post">
+    	<div class="form-title-row">
+			<h1>For Movie MovieName </h1><br>
+			<p>Select how many tickets you would like</p>	
+		</div>
+    	<div class="form-row">
+    		<label>
+    			<span>Adult Ticket ($10):</span> 
+   	 			<input type="number" id="adult" name="adultTicket" placeholder=0 min="0">
+   	 		</label> 
+       </div>
+       <div class="form-row">
+    		<label for="child">
+				<span>Child Ticket ($8):</span> 
+   	 			<input type="number" id="child" name="childTicket" placeholder=0 min="0">
+   	 		</label> 
+       </div>
+       <div class="form-row">
+    		<label for="senior">
+    			<span>Senior Ticket ($8):</span> 
+    			<input type="number" id="senior" name="seniorTicker" placeholder=0 min="0">
+    		</label>
+    	</div>
+    	<div class="form-row">
+			<button type="submit">Submit</button>
+		</div>
+    </form>
+    
+</div>
+
+	
+	
+	<!-- FOOTER -->
+	<footer class="container">
+	  <p class="float-right"><a href="#">Back to top</a></p>
+	  <p>&copy; 2017-2018 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+	</footer>
+</main>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+</body>
+    
+</html>
+
+
+
