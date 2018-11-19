@@ -46,8 +46,8 @@
 </div>
 
 <div class="subnav">
-	<a sec:authorize="hasAuthority('ADMIN')" href="/manageMovies" style="background-color: red;">Update Movies</a>
-	<a sec:authorize="hasAuthority('ADMIN')" href="/editMovie">Edit Movie</a>
+	<a sec:authorize="hasAuthority('ADMIN')" href="/manageMovies">Update Movies</a>
+	<a sec:authorize="hasAuthority('ADMIN')" href="/editMovie" style="background-color: red;">Edit Movies</a>
 </div>
 
 
@@ -55,117 +55,104 @@
 	Movie has been added successfully.
 </div>
 
-
 <div class="main-content">
+
 	
-	<form id="userInfo" class="form-basic needs-validation" novalidate action="#" th:action="@{/addMovie}" th:object="${newMovie}" method="post" enctype="multipart/form-data">
 	
-		
+		<h1 style="text-align:center;">Edit Movies</h1>	
+	<div style="overflow-x:auto;">
+	
+	<table class="form-basic">
+		<tr>
+			<th>Movie Id</th>
+			<th>Movie Title</th>
+			<th>Cast</th>
+			<th>Category</th>
+			<th>ComingSoon</th>
+			<th>Director</th>
+			<th>Length</th>
+			<th>Now Playing</th>
+			<th>Producer</th>
+			<th>Ratings</th>
+			<th>Synopsis</th>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td>2</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		<tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td>2</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		<tr>
+		<tr>
+			<td>2</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		<tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		<tr>	
+	</table>
+	</div>
+	
+	<form id="deleteMovie" class="form-basic needs-validation">
 		<div class="form-title-row">
-			<h1>Add Movie</h1>	
+			<h1>Delete a Movie from database</h1>	
 		</div>
 		
 		<div class="form-row">
 			<label>
-				<span>Movie Title (Mandatory)</span>
-			</label>	    
-		    
-		    <input type="text" th:field="*{title}" class="form-control" id="title" placeholder="" value="" required>
-			<div class="invalid-feedback">
-		    	Valid movie title is required.
-		    </div>	
-		</div>
-		
-		<div class="form-row">
-			<label>
-				<span>Length in mins (Mandatory)</span>
+				<span>Enter Movie ID</span>
 			</label>
 			
-		    <input type="number" th:field="*{length}" class="form-control" id="length" placeholder="" value="" required>
+		    <input type="number"  class="form-control" id="movieId" placeholder="" value="" required>
 			<div class="invalid-feedback">
-		    	Valid movie length is required.
+		    	Valid movie ID is required.
 		    </div>
-		</div>
-		
-		<div class="form-row">
-			<label>
-				<span>Director(s)</span>
-			</label>
-			
-		    <input type="text" th:field="*{director}" class="form-control" id="director" placeholder="" value="">
-		</div>
-		
-		<div class="form-row">
-			<label>
-				<span>Cast</span>
-			</label>
-			
-		    <input type="text" th:field="*{cast}" class="form-control" id="cast" placeholder="" value="">
-		</div>
-		
-		<div class="form-row">
-			<label>
-				<span>Category</span>
-			</label>
-			
-		    <input type="text" th:field="*{category}" class="form-control" id="category" placeholder="" value="">
-		</div>
-		
-		<div class="form-row">
-			<label>
-				<span>Producer(s)</span>
-			</label>
-			
-		    <input type="text" th:field="*{producer}" class="form-control" id="producer" placeholder="" value="">
-		</div>
-		
-		<div class="form-row">
-			<label>
-				<span>Synopsis</span>
-			</label>
-			
-		    <input type="text" th:field="*{synopsis}" class="form-control" id="synopsis" placeholder="" value="">
-		</div>
-		
-		<div class="form-row">
-			<label>
-				<span>Rating</span>
-					<select id="rating" th:field="*{rating}">
-  						<option th:value="G">G - General Audiences</option>
-  						<option th:value="PG">PG – Parental Guidance Suggested</option>
-  						<option th:value="PG-13">PG-13 – Parents Strongly Cautioned</option>
-  						<option th:value="R">R – Restricted</option>
-  						<option th:value="NC-17">NC-17 – Adults Only</option>
-					</select>
-			</label>
-		</div>
-		
-		<div class="form-row">
-			<label>
-				<span>Upload a poster</span>
-				<input type="file" name="poster" id="poster">
-			</label>
-		</div>
-		
-		<div class="form-row">
-			<label>
-				<span>Trailer (input youtube URL)</span>
-			</label>
-			
-		    <input type="text" th:field="*{video}" class="form-control" id="video" placeholder="" value="">
-		</div>
-		
-		<div class="custom-control custom-checkbox">
-		    <input type="checkbox" th:field="*{nowPlaying}" class="custom-control-input" id="nowPlaying">
-		    <label class="custom-control-label" for="nowPlaying">Now Playing (unchecking means the movie is coming soon)</label>
-		</div>
-		
-		<div class="form-row">
-			<button type="submit">Submit Movie</button>
+		    
+		    <div class="form-row">
+				<button type="submit">Submit Movie</button>
+			</div>
 		</div>
 	</form>
-
 </div>
+
 
    
 
