@@ -39,4 +39,8 @@ public class ShowtimeService {
 		showtimeRepository.deleteById(showtimeId);
 	}
 	
+	public List<Showtime> getShowtimeByMovieId(Integer movieId) {
+		return showtimeRepository.findByMovieMovieId(movieId);
+	}
+	
 }

@@ -6,6 +6,9 @@
 	<link href="/css/homepagestyle.css" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" href="/../static/bootstrap/css/bootstrap.css" th:href="@{/bootstrap/css/bootstrap.css}"/>
 
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	
+
 </head>
 <body>
 
@@ -56,24 +59,14 @@
         <li>Directors: <span th:text="${movie.director}"></span></li>
         <li>Stars: <span th:text="${movie.cast}"></span></li>
        </ul>
-       <form action="/action.php">
-        <input type="submit" name="action" value="11:00am">
-        <input type="submit" name="action" value="1:00pm">
-        <input type="submit" name="action" value="4:00pm">
-        <input type="submit" name="action" value="7:00pm">
-        <input type="submit" name="action" value="10:00pm">
-       </form>
-     
+       
+       <a th:href="@{'/selectTickets/' + ${movie.movieId} + '/' + ${showtime.showtimeId}}" th:each="showtime : ${showtimes}" th:text="${showtime.dateTime}" class="btn btn-info mx-1 my-1" role="button"></a>
+       	
   </div>
 </div>
 </div>
 
 
-
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 </body>
 
 

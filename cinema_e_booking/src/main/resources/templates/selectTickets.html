@@ -21,7 +21,7 @@
 <div class="topnav sticky">
 
 	<!-- Pages for all users and admins -->
-    <a href="/home" style="background-color: red">Home</a>
+    <a href="/home">Home</a>
     <a href="/movies">Movies</a>
     <a href="#">Showtimes</a>
     
@@ -30,7 +30,6 @@
     <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Showtimes</a>
     <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Halls</a>
     <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Users</a>
-    <a sec:authorize="hasAuthority('ADMIN')" href="#" >View Reports</a>
         
     <!-- Page for Registered User -->
     <a sec:authorize="hasAuthority('USER')" href="/userProfile">Profile</a>
@@ -45,56 +44,35 @@
     <div th:insert="fragments/general.html :: loginform"></div>
 </div>
 
-
-<div th:if="${#httpServletRequest.remoteUser == null}">
-	<div class="alert alert-success alert-dismissible mb-0" role="alert" th:if="${param.logout}">
-		<button type="button" class="close" data-dismiss="alert">&times;</button>
-		You have been logged out.
-	</div>
-</div>
-<div class="alert alert-success alert-dismissible mb-0" id="alert" role="success" th:if="${activated} == 'true'">
-	<button type="button" class="close" data-dismiss="alert">&times;</button>
-	Your account has been activated. You may now sign in.
-</div>
-<div class="alert alert-success alert-dismissible mb-0" id="alert" role="success" th:if="${registered} == 'true'">
-	<button type="button" class="close" data-dismiss="alert">&times;</button>
-	Thank you for registering. Please check your email to activate your account.
-</div>
-<div class="alert alert-success alert-dismissible mb-0" id="alert" role="success" th:if="${forgotPasswordEmail} == 'true'">
-	<button type="button" class="close" data-dismiss="alert">&times;</button>
-	You have been sent an email with instructions on resetting your password.
-</div>
-<div class="alert alert-success alert-dismissible mb-0" id="alert" role="success" th:if="${passwordChanged} == 'true'">
-	<button type="button" class="close" data-dismiss="alert">&times;</button>
-	You have succesfully changed your password.
-</div>
-
    
 <main role="main">
 
 <div class="main-content">
    
-    <form class="form-basic" action="#" method="post">
+    <form class="form-basic" th:action="@{/selectTicketTypes}" th:object="${ticketTypes}" method="post">
     	<div class="form-title-row">
-			<h1>For Movie MovieName </h1><br>
+			<h1 th:text="'Booking for' + ${movie.title}"></h1>
+			<br><br>
+			<h2 th:text="${showtime.dateTime}"></h2>
+			<br><br>
 			<p>Select how many tickets you would like</p>	
 		</div>
     	<div class="form-row">
     		<label>
-    			<span>Adult Ticket ($10):</span> 
-   	 			<input type="number" id="adult" name="adultTicket" placeholder=0 min="0">
+    			<span>Adult Ticket (Age 11 to 60):</span> 
+   	 			<input type="number" th:field="*{adult}" id="adult" name="adultTicket" placeholder=0 min="0">
    	 		</label> 
        </div>
        <div class="form-row">
     		<label for="child">
-				<span>Child Ticket ($8):</span> 
-   	 			<input type="number" id="child" name="childTicket" placeholder=0 min="0">
+				<span>Child Ticket (Up to age 11):</span> 
+   	 			<input type="number" th:field="*{child}" id="child" name="childTicket" placeholder=0 min="0">
    	 		</label> 
        </div>
        <div class="form-row">
     		<label for="senior">
-    			<span>Senior Ticket ($8):</span> 
-    			<input type="number" id="senior" name="seniorTicker" placeholder=0 min="0">
+    			<span>Senior Ticket (Age 60 and older):</span> 
+    			<input type="number" th:field="*{senior}" id="senior" name="seniorTicker" placeholder=0 min="0">
     		</label>
     	</div>
     	<div class="form-row">
@@ -109,7 +87,7 @@
 	<!-- FOOTER -->
 	<footer class="container">
 	  <p class="float-right"><a href="#">Back to top</a></p>
-	  <p>&copy; 2017-2018 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+	  <p>&copy; Athens Tickets</p>
 	</footer>
 </main>
 
