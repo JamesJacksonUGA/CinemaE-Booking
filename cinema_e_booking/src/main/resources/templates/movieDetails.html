@@ -4,10 +4,8 @@
 	<title>Browse Movies</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link href="/css/homepagestyle.css" rel="stylesheet" type="text/css">
+	<link href="/css/movieDetails.css" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" href="/../static/bootstrap/css/bootstrap.css" th:href="@{/bootstrap/css/bootstrap.css}"/>
-
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-	
 
 </head>
 <body>
@@ -43,30 +41,40 @@
     <div th:insert="fragments/general.html :: loginform"></div>
 </div>
 
-
-
-<div th:each="movie : ${movies}">
-<div class="clearfix float-my-children">
-   <img th:src="@{${'/images/' + movie.picture}}" width=150>
-   
-   <iframe  th:if="${movie.video}" width="560" height="315" th:src="@{${movie.video}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-   
-   <div class=movie_description>
-       <h3 th:text="${movie.title}">Movie Title</h3>
-       <p><span th:text="${movie.rating}"></span> | <span th:text="${movie.length}"></span> min | <span th:text="${movie.category}"></span> 
-       <br><span th:text="${movie.synopsis}"></span></p>
-       <ul style="list-style-type: none; margin-left: -40px;" >
-        <li>Directors: <span th:text="${movie.director}"></span></li>
-        <li>Stars: <span th:text="${movie.cast}"></span></li>
-       </ul>
-       
-       <a th:href="@{'/selectTickets/' + ${movie.movieId} + '/' + ${showtime.showtimeId}}" th:each="showtime : ${showtimes}" th:text="${showtime.dateTime}" class="btn btn-info mx-1 my-1" role="button"></a>
-       	
-  </div>
+<div class="main-content">
+	<div th:each="movie : ${movies}">
+		<div class="detail-container">
+			<div class="column">
+				<img th:src="@{${'/images/' + movie.picture}}" width=300>
+			</div>		
+			<div class="column">
+				<h3 th:text="${movie.title}">Movie Title</h3>
+				<p><span th:text="${movie.rating}"></span> | <span th:text="${movie.length}"></span> min | <span th:text="${movie.category}"></span></p> 
+       			<p><span th:text="${movie.synopsis}"></span></p>
+       			<ul>
+        			<li>Directors: <span th:text="${movie.director}"></span></li>
+        			<li>Producers: <span th:text="${movie.producer}"></span></li>
+        			<li>Stars: <span th:text="${movie.cast}"></span></li>
+       			</ul>
+       			<form action="/action.php">
+        			<input type="submit" name="action" value="11:00am">
+        			<input type="submit" name="action" value="1:00pm">
+        			<input type="submit" name="action" value="4:00pm">
+       				<input type="submit" name="action" value="7:00pm">
+        			<input type="submit" name="action" value="10:00pm">
+       			</form>
+			</div>
+			<iframe  th:if="${movie.video}" width="560" height="315" th:src="@{${movie.video}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		</div>
+	</div>
 </div>
-</div>
 
 
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 </body>
 
 
