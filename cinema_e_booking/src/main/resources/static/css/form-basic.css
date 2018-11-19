@@ -10,7 +10,7 @@ html{
 
     background-color:  #ffffff;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-
+	
     font: bold 14px sans-serif;
     text-align: center;
 }
@@ -110,3 +110,21 @@ html{
     margin: 40px 183px 0;
 }
 
+.form-basic table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.form-basic th, td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+.form-basic tr:hover {background-color: white;}
+.form-basic tr:nth-child(even){background-color: #f2f2f2;}
+
+.form-basic th {
+    background-color: red;
+    color: white;
+}

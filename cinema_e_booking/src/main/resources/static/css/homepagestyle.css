@@ -184,5 +184,22 @@ div.sticky {
     z-index: 1;
 }
 
-    
+.subnav {
+	overflow: hidden;
+	background-color: gray;
+}
+
+.subnav a{
+	float: left;
+	display: block;
+	color: white;
+	text-align:center;
+	padding:4px 6px;
+	text-decoration:none;
+}
+
+.subnav a:hover {
+	background-color:white;
+	color: black;
+}    
     
