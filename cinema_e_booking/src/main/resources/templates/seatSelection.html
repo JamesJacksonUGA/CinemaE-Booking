@@ -6,6 +6,8 @@
 	<link href="/css/homepagestyle.css" rel="stylesheet" type="text/css">
 	<link href="/css/seatstyle.css" rel="stylesheet" type="text/css">
 	
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>	
+	
 	
 </head>
 <body onload="onLoaderFunc()">
@@ -27,7 +29,7 @@
     <a sec:authorize="hasAuthority('ADMIN')" href="#" >View Reports</a>
         
     <!-- Page for Registered User -->
-    <a sec:authorize="hasAuthority('USER')"  style="background-color: red" href="/userProfile">Profile</a>
+    <a sec:authorize="hasAuthority('USER')" href="/userProfile">Profile</a>
     
     <div class="search-container">
         <form action="/action_page.php">
@@ -42,6 +44,7 @@
 <div class="container1">
 
         <div class="w3ls-reg">
+        
             <!-- input fields -->
             <div class="inputForm">
                 <h3>fill the required details below and select your seats</h3>
@@ -53,14 +56,17 @@
                         <input type="text" id="Username" required>
                     </div>
                     <div class="agileits-right">
-                        <label> Number of Seats
+                        <label th:text="'Number of seats: ' + ${ticketTypes.total}"> Number of Seats
                             <span>*</span>
                         </label>
-                        <input type="number" id="Numseats" required min="1">
+                        <input type="number" id="Numseats" required min="1" th:value="${ticketTypes.total}" style="display: none;">
                     </div>
                 </div>
                 <button onclick="takeData()">Start Selecting</button>
             </div>
+            
+            <form class="form-basic" th:action="@{'/checkout/' + ${movie.movieId} + '/' + ${showtime.showtimeId}}" th:object="${selectedSeats}" method="post" id="selectSeatsForm">
+            
             <!-- //input fields -->
             <!-- seat availabilty list -->
             <ul class="seat_w3ls">
@@ -526,25 +532,26 @@
                             <textarea id="NumberDisplay"></textarea>
                         </td>
                         <td>
-                            <textarea id="seatsDisplay"></textarea>
+                            <textarea id="selectedSeats"></textarea>
                         </td>
                     </tr>
                 </table>
             </div>
             <!-- //details after booking displayed here -->
+        
+        </form>    
         </div>
     </div>
 
 
 <div class="copy-wthree">
-        <p>© 2018 Movie Seat Selection . All Rights Reserved | Design by
+        <p>© Athens Tickets . All Rights Reserved | Design by
             <a href="http://w3layouts.com/" target="_blank">W3layouts</a>
         </p>
 </div>
-<script src="js/jquery-2.2.3.min.js"></script>
 
 <!-- script for seat selection -->
-<script>
+<script th:inline="javascript">
 	function onLoaderFunc() {
 		$(".seatStructure *").prop("disabled", true);
         $(".displayerBoxes *").prop("disabled", true);
@@ -552,7 +559,7 @@
 	
 	function takeData() {
         if (($("#Username").val().length == 0) || ($("#Numseats").val().length == 0)) {
-            alert("Please Enter your Name and Number of Seats");
+            alert("Please Enter your Name");
         } else {
             $(".inputForm *").prop("disabled", true);
             $(".seatStructure *").prop("disabled", false);
@@ -576,11 +583,31 @@
             $('#seatsBlock :checked').each(function () {
                 allSeatsVals.push($(this).val());
             });
-
+            
             //Displaying 
             $('#nameDisplay').val(allNameVals);
             $('#NumberDisplay').val(allNumberVals);
-            $('#seatsDisplay').val(allSeatsVals);
+            $('#selectedSeats').val(allSeatsVals.toString());
+            
+            var movieId = /*[[${movie.movieId}]]*/ 'movieId';
+            var showtimeId = /*[[${showtime.showtimeId}]]*/ 'showtimeId';
+            var adult = /*[[${ticketTypes.adult}]]*/ 'adult';
+            var child = /*[[${ticketTypes.child}]]*/ 'child';
+            var senior = /*[[${ticketTypes.senior}]]*/ 'senior';
+            var directTo = "/checkout/" + movieId + "/" + showtimeId + "/" + adult + "/" + child + "/" + senior + "/";
+            
+            var i;
+            for (i = 0; i < allSeatsVals.length; i++) {
+            	if (i > 0) {
+            		directTo +="-";
+            	}
+            	
+            	directTo += allSeatsVals[i];
+            }
+            
+            console.log(directTo);
+            window.location.href=directTo;
+            //document.getElementById("selectSeatsForm").submit();
         } else {
             alert("Please select " + ($("#Numseats").val()) + " seats")
         }

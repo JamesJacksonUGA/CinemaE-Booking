@@ -78,7 +78,7 @@
               <p class="card-text" th:text="${movie.synopsis}"></p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <a class="btn btn-sm btn-outline-secondary" th:href="@{'/book/' + ${movie.movieId}}" role="button">Get tickets</a>
+                  <a class="btn btn-sm btn-outline-secondary" th:href="@{'/selectTickets/' + ${movie.movieId}}" role="button">Get tickets</a>
                   <a class="btn btn-sm btn-outline-secondary" th:href="@{'/movieDetails/' + ${movie.movieId}}" role="button">Details</a>
                 </div>
                 <small class="text-muted" th:text="${movie.rating} + ' | ' + ${movie.length} + ' minutes'">
@@ -100,7 +100,7 @@
     <p class="float-right">
       <a href="#">Back to top</a>
     </p>
-    <p>Selection brought to you by &copy; Athens Ticket's Limited</p>
+    <p>Selection brought to you by &copy; Athens Tickets Limited</p>
   </div>
 </footer>
 

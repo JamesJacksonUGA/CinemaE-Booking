@@ -5,6 +5,7 @@ public class TicketTypeSelection {
 	private Integer adult = 0;
 	private Integer child = 0;
 	private Integer senior = 0;
+	private Integer total = adult + child + senior;
 	
 	
 	public TicketTypeSelection() {
@@ -27,6 +28,12 @@ public class TicketTypeSelection {
 	}
 	public void setSenior(Integer senior) {
 		this.senior = senior;
+	}
+	public Integer getTotal() {
+		return total;
+	}
+	public void setTotal(Integer total) {
+		this.total = total;
 	}
 	
 }

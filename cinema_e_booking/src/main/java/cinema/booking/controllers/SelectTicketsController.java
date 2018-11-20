@@ -25,9 +25,16 @@ public class SelectTicketsController {
 	public String getSelectTickets() {
 		return "selectTickets";
 	}
+	
+	@RequestMapping(value="/selectTicketTypes")
+	public String getSelectTicketTypes() {
+		return "selectTickets";
+	}
 
 	@RequestMapping(value="/selectTickets/{movie_id}/{showtime_id}")
-	public String selectTickets(@PathVariable("movie_id") Integer movie_id, @PathVariable("showtime_id") Integer showtime_id, Model model) {
+	public String selectTickets(@PathVariable("movie_id") Integer movie_id, 
+			@PathVariable("showtime_id") Integer showtime_id, 
+			Model model) {
 				
 		//unwrap Optional<Movie> object before adding to model
 		movieService.getMovieById(movie_id).ifPresent(o -> model.addAttribute("movie", o));
@@ -37,13 +44,22 @@ public class SelectTicketsController {
 		return "selectTickets";
 	}
 	
-	@PostMapping(value="/selectTicketTypes")
-	public String selectTicketTypes(@ModelAttribute("ticketTypes") TicketTypeSelection ticketTypes, Model model) {
+	@PostMapping(value="/selectTicketTypes/{movie_id}/{showtime_id}")
+	public String selectTicketTypes(@ModelAttribute("ticketTypes") TicketTypeSelection ticketTypes, 
+			@PathVariable("movie_id") Integer movie_id, 
+			@PathVariable("showtime_id") Integer showtime_id, 
+			Model model) {
+		ticketTypes.setTotal(ticketTypes.getAdult()
+				+ ticketTypes.getChild()
+				+ ticketTypes.getSenior());
 		model.addAttribute("ticketTypes", ticketTypes);
+		movieService.getMovieById(movie_id).ifPresent(o -> model.addAttribute("movie", o));
+		showtimeService.getShowtimeById(showtime_id).ifPresent(o -> model.addAttribute("showtime", o));
 		
+		model.addAttribute("selectedSeats", new String());
 		
 		//direct to seat selection page
-		return "homepage";
+		return "seatSelection";
 	}
 	
 }

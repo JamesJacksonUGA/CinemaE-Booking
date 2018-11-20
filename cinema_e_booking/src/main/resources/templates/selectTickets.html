@@ -49,7 +49,7 @@
 
 <div class="main-content">
    
-    <form class="form-basic" th:action="@{/selectTicketTypes}" th:object="${ticketTypes}" method="post">
+    <form class="form-basic" th:action="@{'/selectTicketTypes/' + ${movie.movieId} + '/' + ${showtime.showtimeId}}" th:object="${ticketTypes}" method="post">
     	<div class="form-title-row">
 			<h1 th:text="'Booking for' + ${movie.title}"></h1>
 			<br><br>
