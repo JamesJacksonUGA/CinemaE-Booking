@@ -27,6 +27,10 @@ public class PromotionService {
 		return promotionRepository.findById(promotionId);
 	}
 	
+	public Promotion getPromotionByPromoCode(String code) {
+		return promotionRepository.findPromotionByPromoCode(code);
+	}
+	
 	public void addPromotion(Promotion promotion) {
 		promotionRepository.save(promotion);
 	}

@@ -20,7 +20,6 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class Booking {
 
 	@Id
-	@NotNull
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer bookingId;
 	@NotNull
@@ -36,11 +35,24 @@ public class Booking {
 	@ManyToOne
 	private Showtime showtime;
 	@NotNull
-	private Integer cc_num;
+	@ManyToOne
+	private PaymentInfo paymentInfo;
 	
 	
-	public Booking() {
-		
+
+	public Booking(@NotNull User user, Promotion promotion, @NotNull Showtime showtime,
+			@NotNull PaymentInfo paymentInfo) {
+		super();
+		this.user = user;
+		this.promotion = promotion;
+		this.showtime = showtime;
+		this.paymentInfo = paymentInfo;
+	}
+	public Booking(@NotNull User user, @NotNull Showtime showtime, @NotNull PaymentInfo paymentInfo) {
+		super();
+		this.user = user;
+		this.showtime = showtime;
+		this.paymentInfo = paymentInfo;
 	}
 	public Integer getBookingId() {
 		return bookingId;
@@ -79,6 +91,12 @@ public class Booking {
 	}
 	public void setShowtime(Showtime showtime) {
 		this.showtime = showtime;
+	}
+	public PaymentInfo getPaymentInfo() {
+		return paymentInfo;
+	}
+	public void setPaymentInfo(PaymentInfo paymentInfo) {
+		this.paymentInfo = paymentInfo;
 	}
 
 	

@@ -27,6 +27,10 @@ public class TicketTypeService {
 	public double getPriceByType(String type) {
 		return ticketTypeRepository.findPriceByType(type);
 	}
+	
+	public Integer getTicketTypeIdByType(String type) {
+		return ticketTypeRepository.findTicketTypeIdByType(type);
+	}
 
 	public Optional<TicketType> getTicketTypeById(Integer ticketTypeId) {
 		return ticketTypeRepository.findById(ticketTypeId);

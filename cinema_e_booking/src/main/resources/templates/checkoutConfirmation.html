@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="en">
+<head>
+    <title>Athens Tickets</title>
+    <link href="/css/homepagestyle.css" rel="stylesheet" type="text/css">
+    <link href="/css/form-basic.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.css" th:href="@{/bootstrap/css/bootstrap.css}"/>
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css" th:href="@{/bootstrap/css/bootstrap.min.css}"/>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>	
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+    
+    
+<body class = "bg-light">
+
+   <div class="container">
+      <div class="py-1 text-center">
+        <h2>Order Confirmation</h2>
+        <p class="lead">Please confirm your order to secure your tickets</p>
+      </div>
+	
+      <div class="row">
+      <div class="col-md-4 order-md-2 mb-4 text-center">
+      <form class="needs-validation" th:action="@{'/checkoutConfirmation/' + ${movie.movieId} + '/' + ${showtime.showtimeId} + 
+          '/' + ${adult} + '/' + ${child} + '/' + ${senior} + '/' + ${selectedSeats}}" th:object="${checkoutForm}" method="post" novalidate>
+        
+          <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-muted">Your cart</span>
+            <span class="badge badge-secondary badge-pill" th:text="${totalTickets}">#</span>
+          </h4>
+          <ul class="list-group mb-3">
+            <li class="list-group-item d-flex justify-content-between lh-condensed" th:if="${adult} > 0" th:each="adultTicket : ${#numbers.sequence(0, adult - 1)}">
+              <div>
+                <h6 class="my-0">Adult ticket</h6>
+                <small class="text-muted">Admit one age 12-59</small>
+              </div>
+              <span class="text-muted" th:text="'$' + ${adultPrice}">$</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between lh-condensed" th:if="${child} > 0" th:each="childTicket : ${#numbers.sequence(0, child - 1)}">
+              <div>
+                <h6 class="my-0">Child ticket</h6>
+                <small class="text-muted">Admit one up to age 11</small>
+              </div>
+              <span class="text-muted" th:text="'$' + ${childPrice}">$</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between lh-condensed" th:if="${senior} > 0" th:each="seniorTicket : ${#numbers.sequence(0, senior - 1)}">
+              <div>
+                <h6 class="my-0">Senior ticket</h6>
+                <small class="text-muted">Admit one age 60 and up</small>
+              </div>
+              <span class="text-muted" th:text="'$' + ${seniorPrice}">$</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between bg-light" th:if="${promoCode}">
+              <div class="text-success">
+                <h6 class="my-0">Promo code</h6>
+                <small th:text="${promoCode} + ' (' + ${percentOff} + '% off)'">EXAMPLECODE</small>
+              </div>
+              <span class="text-success" th:text="'-$' + ${amountOff}">-$</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <span>Total (USD)</span>
+              <strong th:text="'$' + ${total}">$total</strong>
+            </li>
+          </ul>
+		  <input type="text" name="ccnum" id="ccnum" th:value="${checkoutForm.ccnum}" style="display:none">
+		  <input type="number" step="1" name="CVV" id="CVV" th:value="${checkoutForm.CVV}" style="display:none">
+		  <input type="text" name="expDate" id="expDate" th:value="${checkoutForm.expDate}" style="display:none">
+		  <input name="promoCode" id="promoCode" th:value="${promoCode}" style="display:none">
+		  <input name="cardholderName" id="cardholderName" th:value="${checkoutForm.cardholderName}" style="display:none">
+		  <input name="address" id="address" th:value="${checkoutForm.address}" style="display:none">
+		  <input name="address2" id="address2" th:value="${checkoutForm.address2}" style="display:none">
+		  <input name="zip" id="zip" th:value="${checkoutForm.zip}" style="display:none">
+		  <input name="country" id="country" th:value="${checkoutForm.country}" style="display:none">
+		  <input name="state" id="state" th:value="${checkoutForm.state}" style="display:none">
+
+		  <button type="button"  onclick="goBack()">Go Back</button>
+		  <button type="submit" class="btn btn-outline-primary text-center">Submit your order</button>
+		  
+		</form>
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+</div>
+
+      <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; Athens Tickets</p>
+      </footer>
+
+
+
+<script>
+function goBack() {
+    window.history.back();
+}
+</script>
+
+</body>
+    
+</html>

@@ -15,18 +15,30 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 public class Ticket {
 
 	@Id
-	@NotNull
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer ticketId;
 	@ManyToOne
 	@JsonBackReference
 	private Booking booking;
 	@NotNull
-	private Integer seatNo;
+	private String seatNo;
 	@NotNull
 	private Integer type;
 	@NotNull
-	private Integer sellingPrice;
+	private double sellingPrice;
+	
+	
+	
+	public Ticket() {
+		
+	}
+	public Ticket(Booking booking, @NotNull String seatNo, @NotNull Integer type, @NotNull double sellingPrice) {
+		super();
+		this.booking = booking;
+		this.seatNo = seatNo;
+		this.type = type;
+		this.sellingPrice = sellingPrice;
+	}
 	public Integer getTicketId() {
 		return ticketId;
 	}
@@ -39,10 +51,10 @@ public class Ticket {
 	public void setBooking(Booking booking) {
 		this.booking = booking;
 	}
-	public Integer getSeatNo() {
+	public String getSeatNo() {
 		return seatNo;
 	}
-	public void setSeatNo(Integer seatNo) {
+	public void setSeatNo(String seatNo) {
 		this.seatNo = seatNo;
 	}
 	public Integer getType() {
@@ -51,10 +63,10 @@ public class Ticket {
 	public void setType(Integer type) {
 		this.type = type;
 	}
-	public Integer getSellingPrice() {
+	public double getSellingPrice() {
 		return sellingPrice;
 	}
-	public void setSellingPrice(Integer sellingPrice) {
+	public void setSellingPrice(double sellingPrice) {
 		this.sellingPrice = sellingPrice;
 	}
 	

@@ -15,15 +15,10 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 public class Seat {
 
 	@Id
-	@NotNull
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer seatId;
 	@NotNull
-	private Integer seatNo;
-	@NotNull
-	private char rowLetter;
-	@NotNull
-	private Integer colNumber;
+	private String seatNo;
 	@NotNull
 	private boolean taken = false;
 	@ManyToOne
@@ -37,23 +32,19 @@ public class Seat {
 	public Seat() {
 		
 	}
+	public Seat(@NotNull String seatNo, @NotNull boolean taken,
+			Showtime showtime, Booking booking) {
+		super();
+		this.seatNo = seatNo;
+		this.taken = taken;
+		this.showtime = showtime;
+		this.booking = booking;
+	}
 	public Integer getSeatId() {
 		return seatId;
 	}
 	public void setSeatId(Integer seatId) {
 		this.seatId = seatId;
-	}
-	public char getRowLetter() {
-		return rowLetter;
-	}
-	public void setRowLetter(char rowLetter) {
-		this.rowLetter = rowLetter;
-	}
-	public Integer getColNumber() {
-		return colNumber;
-	}
-	public void setColNumber(Integer colNumber) {
-		this.colNumber = colNumber;
 	}
 	public boolean isTaken() {
 		return taken;
@@ -73,10 +64,10 @@ public class Seat {
 	public void setBooking(Booking booking) {
 		this.booking = booking;
 	}
-	public Integer getSeatNo() {
+	public String getSeatNo() {
 		return seatNo;
 	}
-	public void setSeatNo(Integer seatNo) {
+	public void setSeatNo(String seatNo) {
 		this.seatNo = seatNo;
 	}
 	

@@ -27,6 +27,14 @@ public class ShowtimeService {
 		return showtimeRepository.findById(showtimeId);
 	}
 	
+	public Showtime findShowtimeById(Integer showtimeId) {
+		return showtimeRepository.findShowtimeByShowtimeId(showtimeId);
+	}
+	
+	public Integer findTheaterIdByShowtimeId(Integer showtimeId) {
+		return showtimeRepository.findTheaterIdByShowtimeId(showtimeId);
+	}
+	
 	public void addShowtime(Showtime showtime) {
 		showtimeRepository.save(showtime);
 	}
