@@ -31,8 +31,7 @@ public class Promotion {
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date expDate;
-	@NotNull
-	private boolean active;
+	private boolean active = true;
 	@NotNull
 	private Integer percentOff;
 	@OneToMany(cascade = CascadeType.ALL, 
