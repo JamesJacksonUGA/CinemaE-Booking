@@ -27,6 +27,7 @@
     <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Showtimes</a>
     <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Halls</a>
     <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Users</a>
+    <a sec:authorize="hasAuthority('ADMIN')" href="/addPromotion">Promotions</a>  
         
     <!-- Page for Registered User -->
     <a sec:authorize="hasAuthority('USER')" href="/userProfile">Profile</a>
@@ -57,6 +58,7 @@
         			<li>Directors: <span th:text="${movie.director}"></span></li>
         			<li>Producers: <span th:text="${movie.producer}"></span></li>
         			<li>Stars: <span th:text="${movie.cast}"></span></li>
+        			<li><a class="btn btn-sm btn-outline-secondary" sec:authorize="hasAuthority('ADMIN')"  th:href="@{'/editMovieDetails/' + ${movie.movieId}}" role="button">Edit Movie</a></li>
        			</ul>
 			</div>
 			<iframe  th:if="${movie.video}" width="560" height="315" th:src="@{${movie.video}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

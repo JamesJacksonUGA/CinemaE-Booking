@@ -37,7 +37,6 @@
     <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Showtimes</a>
     <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Halls</a>
     <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Users</a>
-    <a sec:authorize="hasAuthority('ADMIN')" href="#" >View Reports</a>
     <a sec:authorize="hasAuthority('ADMIN')" href="/addPromotion">Promotions</a>    
     <!-- Page for Registered User -->
     <a sec:authorize="hasAuthority('USER')" href="/userProfile">Profile</a>
@@ -79,8 +78,7 @@
               <p class="card-text" th:text="${movie.synopsis}"></p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <a class="btn btn-sm btn-outline-secondary" th:href="@{'/selectTickets/' + ${movie.movieId}}" role="button">Get tickets</a>
-                  <a class="btn btn-sm btn-outline-secondary" th:href="@{'/movieDetails/' + ${movie.movieId}}" role="button">Details</a>
+                  <a class="btn btn-sm btn-outline-secondary" th:href="@{'/movieDetails/' + ${movie.movieId}}" role="button">View details and tickets</a>
                   <a class="btn btn-sm btn-outline-secondary" sec:authorize="hasAuthority('ADMIN')"  th:href="@{'/editMovieDetails/' + ${movie.movieId}}" role="button">Edit Movie</a>
                 </div>
                 <small class="text-muted" th:text="${movie.rating} + ' | ' + ${movie.length} + ' minutes'">

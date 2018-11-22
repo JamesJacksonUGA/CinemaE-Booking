@@ -30,7 +30,6 @@
     <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Showtimes</a>
     <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Halls</a>
     <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Users</a>
-    <a sec:authorize="hasAuthority('ADMIN')" href="#" >View Reports</a>
     <a sec:authorize="hasAuthority('ADMIN')" href="/addPromotion" style="background-color: red">Promotions</a>
         
     <!-- Page for Registered User -->
@@ -53,8 +52,7 @@
 
 <div class="main-content">
 	
-	<form id="userInfo" class="form-basic needs-validation"  method="post" enctype="multipart/form-data">
-	
+	<form id="userInfo" class="form-basic needs-validation"  th:action="@{/addPromotion}" th:object="${promotion}" method="post">	
 		
 		<div class="form-title-row">
 			<h1>Add Promotion</h1>	
@@ -65,7 +63,7 @@
 				<span>Promo Code (Mandatory)</span>
 			</label>	    
 		    
-		    <input type="text"  class="form-control" id="promoCode" placeholder="" value="" required>
+		    <input type="text"  class="form-control" id="promoCode" placeholder="" value="" th:field="*{promoCode}" required>
 			<div class="invalid-feedback">
 		    	Valid promo code is required.
 		    </div>	
@@ -76,7 +74,7 @@
 				<span>Percent Off (Mandatory)</span>
 			</label>
 			
-		    <input type="number"  class="form-control" id="percentOff" placeholder="" value="" required>
+		    <input type="number"  class="form-control" id="percentOff" placeholder="" value="" th:field="*{percentOff}" required>
 			<div class="invalid-feedback">
 		    	Valid number is required.
 		    </div>
@@ -87,10 +85,17 @@
 				<span>Expiration Date (Mandatory)</span>
 			</label>
 			
-		    <input type="date"  class="form-control" id="expDate" placeholder="" value="" required>
+		    <input type="date"  class="form-control" id="expDate" placeholder="" value="" th:field="*{expDate}" required>
 			<div class="invalid-feedback">
 		    	Valid number is required.
 		    </div>
+		</div>
+		
+		<div class="form=row">
+			<div class="custom-control custom-checkbox">
+		    <input type="checkbox" th:field="*{active}" class="custom-control-input" id="nowPlaying">
+		    <label class="custom-control-label" for="nowPlaying">Activate promotion</label>
+			</div>
 		</div>
 		
 		<div class="form-row">

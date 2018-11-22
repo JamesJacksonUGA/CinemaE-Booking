@@ -15,6 +15,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -22,12 +24,12 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class Promotion {
 
 	@Id
-	@NotNull
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer promotionId;
 	@NotNull
 	private String promoCode;
 	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date expDate;
 	@NotNull
 	private boolean active;
