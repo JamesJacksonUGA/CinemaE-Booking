@@ -35,6 +35,10 @@ public class ShowtimeService {
 		return showtimeRepository.findTheaterIdByShowtimeId(showtimeId);
 	}
 	
+	public List<Showtime> findShowtimeByDate(String date, Integer movieId) {
+		return showtimeRepository.findShowtimeByDate(date, movieId);
+	}
+	
 	public void addShowtime(Showtime showtime) {
 		showtimeRepository.save(showtime);
 	}

@@ -20,8 +20,19 @@ public class MovieDetailsController {
 
 	@RequestMapping(value= {"/movieDetails/{movie_id}"})
 	public String movieDetails(@PathVariable("movie_id") Integer movie_id, Model model) {
-		model.addAttribute("showtimes", showtimeService.getShowtimeByMovieId(movie_id));
+		model.addAttribute("allShowtimes", showtimeService.getShowtimeByMovieId(movie_id));
 		movieService.getMovieById(movie_id).ifPresent(o -> model.addAttribute("movies", o));
+	
+		return "movieDetails";
+	}
+	
+	@RequestMapping(value= {"/movieDetails/{movie_id}/{date}"})
+	public String movieDetailsDate(@PathVariable("movie_id") Integer movie_id, 
+			@PathVariable("date") String date,
+			Model model) {
+		movieService.getMovieById(movie_id).ifPresent(o -> model.addAttribute("movies", o));
+		model.addAttribute("showtimes", showtimeService.findShowtimeByDate(date, movie_id));
+		
 	
 		return "movieDetails";
 	}

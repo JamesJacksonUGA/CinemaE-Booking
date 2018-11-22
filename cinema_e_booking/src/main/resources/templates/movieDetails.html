@@ -41,7 +41,9 @@
     <div th:insert="fragments/general.html :: loginform"></div>
 </div>
 
-<div class="main-content">
+<div class="main-content container">
+<div class="row">
+<div class="col-16"> 
 	<div th:each="movie : ${movies}">
 		<div class="detail-container">
 			<div class="column">
@@ -56,25 +58,39 @@
         			<li>Producers: <span th:text="${movie.producer}"></span></li>
         			<li>Stars: <span th:text="${movie.cast}"></span></li>
        			</ul>
-       			<form action="/action.php">
-        			<input type="submit" name="action" value="11:00am">
-        			<input type="submit" name="action" value="1:00pm">
-        			<input type="submit" name="action" value="4:00pm">
-       				<input type="submit" name="action" value="7:00pm">
-        			<input type="submit" name="action" value="10:00pm">
-       			</form>
 			</div>
 			<iframe  th:if="${movie.video}" width="560" height="315" th:src="@{${movie.video}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 		</div>
 	</div>
 </div>
-
+<div class="col text-center">
+	<br><br>
+	<h2>Showtimes</h2>
+	<label>Select a date</label>
+	<input type="date" name="date" id="date" onchange="dateSelect(event);" onkeypress="return false"/>
+	<br><br>
+	<a class="btn btn-primary my-2" th:if="showtimes" th:each="showtime : ${showtimes}" th:href="@{${'/selectTickets/' + movies.movieId + '/' + showtime.showtimeId}}" th:text="${showtime.dateTime}"></a>
+</div>
+</div>
+</div>
 
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+
+
+<script th:inline="javascript">
+
+function dateSelect(event){
+	var date = (event.target.value);
+	var movie_id = /*[[${movies.movieId}]]*/ 'movieId';
+	var url = "/movieDetails/" + movie_id + "/" + date;
+	window.location.href = url;
+}
+
+</script>
 </body>
 
 
