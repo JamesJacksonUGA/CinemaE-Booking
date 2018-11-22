@@ -8,7 +8,7 @@
 	<!-- Custom styles for this template -->
     <link href="album.css" type="text/css">
 	<link rel="stylesheet" href="../static/bootstrap/css/bootstrap.css" th:href="@{/bootstrap/css/bootstrap.css}"/>
-	<link href="css/homepagestyle.css" rel="stylesheet" type="text/css">
+	<link href="/css/homepagestyle.css" rel="stylesheet" type="text/css">
 
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
@@ -51,6 +51,9 @@
     <div th:insert="fragments/general.html :: loginform"></div>
 </div>
 
+<div class="alert alert-success alert-dismissible mb-0" id="alert" role="success" th:if="${deletedMovie} == 'true'">
+	Movie has been successfully deleted.
+</div>
 
 <main role="main">
 

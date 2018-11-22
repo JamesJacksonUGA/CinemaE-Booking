@@ -59,6 +59,7 @@
         			<li>Producers: <span th:text="${movie.producer}"></span></li>
         			<li>Stars: <span th:text="${movie.cast}"></span></li>
         			<li><a class="btn btn-sm btn-outline-secondary" sec:authorize="hasAuthority('ADMIN')"  th:href="@{'/editMovieDetails/' + ${movie.movieId}}" role="button">Edit Movie</a></li>
+       			  	<li><a class="btn btn-sm btn-outline-danger" sec:authorize="hasAuthority('ADMIN')"  th:href="@{'/deleteMovieDetails/' + ${movie.movieId}}" role="button">Delete Movie</a></li>
        			</ul>
 			</div>
 			<iframe  th:if="${movie.video}" width="560" height="315" th:src="@{${movie.video}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
