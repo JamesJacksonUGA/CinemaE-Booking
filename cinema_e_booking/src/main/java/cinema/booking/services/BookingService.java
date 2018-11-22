@@ -27,6 +27,18 @@ public class BookingService {
 		return bookingRepository.findById(bookingId);
 	}
 	
+	public List<Booking> findBookingsByUserId(Integer userId) {
+		return bookingRepository.findBookingsByUserId(userId);
+	}
+	
+	public Integer findShowtimeIdByBookingId(Integer bookingId) {
+		return bookingRepository.findShowtimeIdByBookingId(bookingId);
+	}
+	
+	public Integer findPaymentInfoIdByBookingId(Integer bookingId) {
+		return bookingRepository.findPaymentInfoIdByBookingId(bookingId);
+	}
+	
 	public void addBooking(Booking booking) {
 		bookingRepository.save(booking);
 	}

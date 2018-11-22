@@ -40,6 +40,9 @@ public class Booking {
 	
 	
 
+	public Booking() {
+		
+	}
 	public Booking(@NotNull User user, Promotion promotion, @NotNull Showtime showtime,
 			@NotNull PaymentInfo paymentInfo) {
 		super();

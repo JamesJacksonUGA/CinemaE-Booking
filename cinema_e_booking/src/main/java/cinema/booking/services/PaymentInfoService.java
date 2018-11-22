@@ -27,6 +27,10 @@ public class PaymentInfoService {
 		return paymentInfoRepository.findById(paymentInfoId);
 	}
 	
+	public PaymentInfo findPaymentInfoById(Integer paymentInfoId) {
+		return paymentInfoRepository.findPaymentInfoById(paymentInfoId);
+	}
+	
 	public void addPaymentInfo(PaymentInfo paymentInfo) {
 		paymentInfoRepository.save(paymentInfo);
 	}

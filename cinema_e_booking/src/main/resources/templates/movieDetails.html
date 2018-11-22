@@ -29,7 +29,7 @@
     <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Users</a>
         
     <!-- Page for Registered User -->
-    <a sec:authorize="hasAuthority('USER')" href="#">Profile</a>
+    <a sec:authorize="hasAuthority('USER')" href="/userProfile">Profile</a>
     
     <div class="search-container">
         <form action="/action_page.php">

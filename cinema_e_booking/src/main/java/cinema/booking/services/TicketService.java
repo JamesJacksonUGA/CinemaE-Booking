@@ -27,6 +27,30 @@ public class TicketService {
 		return ticketRepository.findById(ticketId);
 	}
 	
+	public Integer getAdultByBookingId(Integer bookingId) {
+		return ticketRepository.getAdultByBookingId(bookingId);
+	}
+	
+	public Integer getChildByBookingId(Integer bookingId) {
+		return ticketRepository.getChildByBookingId(bookingId);
+	}
+	
+	public Integer getSeniorByBookingId(Integer bookingId) {
+		return ticketRepository.getSeniorByBookingId(bookingId);
+	}
+	
+	public double getAdultSellingPrice(Integer bookingId) {
+		return ticketRepository.getAdultSellingPrice(bookingId);
+	}
+	
+	public double getChildSellingPrice(Integer bookingId) {
+		return ticketRepository.getChildSellingPrice(bookingId);
+	}
+	
+	public double getSeniorSellingPrice(Integer bookingId) {
+		return ticketRepository.getSeniorSellingPrice(bookingId);
+	}
+	
 	public void addTicket(Ticket ticket) {
 		ticketRepository.save(ticket);
 	}

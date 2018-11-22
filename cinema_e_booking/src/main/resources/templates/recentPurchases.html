@@ -29,7 +29,7 @@
     <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Halls</a>
     <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Users</a>
     <a sec:authorize="hasAuthority('ADMIN')" href="#" >View Reports</a>
-        
+    
     <!-- Page for Registered User -->
     <a sec:authorize="hasAuthority('USER')"  style="background-color: red" href="/userProfile">Profile</a>
     
@@ -56,21 +56,36 @@
 
 
 <div class="editProfile">
-	<div class="section">
-		<button class="accordion"><h2>Avenger: Infinity war</h2></button>
+	<div class="section" th:each="recentPurchase : ${recentPurchases}">
+		<button class="accordion"><h2 th:text="${recentPurchase.title}">Movie title</h2></button>
 			<div class="panel">
 				<nav>
 					<p><img src="src/main/resources/static/images/infinityWar.jpg"></p>			
 				</nav>
 				
 				<article>
-					<p><span>Movie Title</span></p>
-					<p><span>Order confirmation: number</span></p>
-					<p><span>Showtime + Date</span></p>
-					<p><span>Amount of Tickets</span></p>
-					<p><span>Total Price</span></p>
+					<p><span th:text="${recentPurchase.title}">Movie Title</span></p>
+					<p><span th:text="${recentPurchase.datetime}">Showtime + Date</span></p>
+					
+	            	<hr class="mb-4">
+					
+					<p><span>Tickets purchased</span></p>
+					<p th:if="${recentPurchase.adult}" th:text="'Adult: ' + ${recentPurchase.adult}">Adult</p>
+					<p th:if="${recentPurchase.child}" th:text="'Child: ' + ${recentPurchase.child}">Child</p>
+					<p th:if="${recentPurchase.senior}" th:text="'Senior: ' + ${recentPurchase.senior}">Senior</p>
+					<p><span th:text="'Total: $' + ${recentPurchase.total}">Total Price</span></p>
+					
+		            <hr class="mb-4">
+					
 					<p><span>Billing Address</span></p>
+					<p th:text="${recentPurchase.address}"></p>
+					<p th:if="${recentPurchaseaddress2}" th:text="${recentPurchaseaddress2}"></p>
+					<p th:text="${recentPurchase.country} + ' | ' + ${recentPurchase.state} + ' | ' + ${recentPurchase.zip}"></p>
+					
+					<hr class="mb-4">
+					
 					<p><span>Credit Card Used</span></p>
+					<p th:text="${recentPurchase.creditCard}"></p>
 					
 				</article>
 	
