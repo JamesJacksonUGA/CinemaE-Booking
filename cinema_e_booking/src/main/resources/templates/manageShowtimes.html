@@ -27,10 +27,10 @@
     
     <!-- Pages for Admin -->
     <a sec:authorize="hasAuthority('ADMIN')" href="/manageMovies">Manage Movies</a>
-    <a sec:authorize="hasAuthority('ADMIN')" href="/manageShowtimes">Manage Showtimes</a>
+    <a sec:authorize="hasAuthority('ADMIN')" href="/manageShowtimes"  style="background-color: red">Manage Showtimes</a>
     <a sec:authorize="hasAuthority('ADMIN')" href="/manageHalls">Manage Halls</a>
     <a sec:authorize="hasAuthority('ADMIN')" href="/manageUsers">Manage Users</a>
-    <a sec:authorize="hasAuthority('ADMIN')" href="/addPromotion"   style="background-color: red">Promotions</a>    
+    <a sec:authorize="hasAuthority('ADMIN')" href="/addPromotion">Promotions</a>    
     <!-- Page for Registered User -->
     <a sec:authorize="hasAuthority('USER')" href="/userProfile">Profile</a>
     
@@ -44,94 +44,50 @@
     <div th:insert="fragments/general.html :: loginform"></div>
 </div>
 
-
-<div class="alert alert-success alert-dismissible mb-0" id="alert" role="success" th:if="${added} == 'true'">
-	Promotion has been added successfully.
-</div>
-<div class="alert alert-danger alert-dismissible mb-0" id="alert" role="danger" th:if="${duplicate} == 'true'">
-	A promotion already exists with that code.
-</div>
-<div class="alert alert-danger alert-dismissible mb-0" id="alert" role="danger" th:if="${wrongCode} == 'true'">
-	The promo code entered was not valid.
-</div>
-<div class="alert alert-success alert-dismissible mb-0" id="alert" role="success" th:if="${deleted} == 'true'">
-	Promotion has been successfully deleted.
-</div>
-
 <div class="main-content">
 	
-	<div class="row">
-	<div class="col">
-	<form id="userInfo" class="form-basic needs-validation"  th:action="@{/addPromotion}" th:object="${promotion}" method="post">	
+	<form id="showtimeInfo" class="form-basic needs-validation">
 		
 		<div class="form-title-row">
-			<h1>Add Promotion</h1>	
+			<h1>Add Showtime</h1>
 		</div>
 		
 		<div class="form-row">
 			<label>
-				<span>Promo Code (Mandatory)</span>
-			</label>	    
-		    
-		    <input type="text"  class="form-control" id="promoCode" placeholder="" value="" th:field="*{promoCode}" required>
-			<div class="invalid-feedback">
-		    	Valid promo code is required.
-		    </div>	
+				<span>Theater Hall</span>
+				<select>
+					<option id="1"> Theater 1</option>
+				</select>
+			</label>
 		</div>
 		
 		<div class="form-row">
 			<label>
-				<span>Percent Off (Mandatory)</span>
+				<span>Available Movies</span>
+				<select>
+					<option id="1">Avengers</option>
+				</select>
 			</label>
 			
-		    <input type="number"  class="form-control" id="percentOff" placeholder="" value="" th:field="*{percentOff}" required>
-			<div class="invalid-feedback">
-		    	Valid number is required.
-		    </div>
 		</div>
 		
 		<div class="form-row">
 			<label>
-				<span>Expiration Date (Mandatory)</span>
+				<span>Select Date</span>
+				
 			</label>
+			<input type="date" id="date">
 			
-		    <input type="date"  class="form-control" id="expDate" placeholder="" value="" th:field="*{expDate}" required>
-			<div class="invalid-feedback">
-		    	Valid number is required.
-		    </div>
 		</div>
 		
 		<div class="form-row">
-			<button type="submit">Add promotion</button>
+			<button type="submit">Submit Movie</button>
 		</div>
-	</form>
-	</div>
 	
-	<div class="col">
-		<form id="userInfo" class="form-basic needs-validation"  th:action="@{/deletePromotion}" method="post">	
-		
-		<div class="form-title-row">
-			<h1>Delete Promotion</h1>	
-		</div>
-		
-		<div class="form-row">
-			<label>
-				<span>Promo Code</span>
-			</label>	    
-		    
-		    <input type="text"  class="form-control" id="deletePromoCode" name="deletePromoCode" placeholder="" value="" required>
-			<div class="invalid-feedback">
-		    	Valid promo code is required.
-		    </div>	
-		</div>
-		
-		<div class="form-row">
-			<button type="submit">Delete Promotion</button>
-		</div>
 	</form>
-	</div>
-	</div>
+	
 </div>
+
 
 
    
@@ -167,6 +123,7 @@
 </script>
 
 
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 </body>
     
 </html>
