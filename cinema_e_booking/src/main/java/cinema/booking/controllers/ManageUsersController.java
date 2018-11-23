@@ -41,6 +41,30 @@ public class ManageUsersController {
 		return "manageUsers";
 	}
 	
+	@RequestMapping(value="/suspendUser/{userId}")
+	public String suspendUser(@PathVariable("userId") Integer userId, Model model) {
+		
+		User user = userService.findUserById(userId);
+		user.setEnabled(false);
+		userService.updateUser(user);
+		
+		model.addAttribute("users", userService.getAllUsers());
+		model.addAttribute("suspended", "true");
+		return "manageUsers";
+	}
+	
+	@RequestMapping(value="/activateUser/{userId}")
+	public String activateUser(@PathVariable("userId") Integer userId, Model model) {
+		
+		User user = userService.findUserById(userId);
+		user.setEnabled(true);
+		userService.updateUser(user);
+		
+		model.addAttribute("users", userService.getAllUsers());
+		model.addAttribute("activated", "true");
+		return "manageUsers";
+	}
+	
 }
 
 

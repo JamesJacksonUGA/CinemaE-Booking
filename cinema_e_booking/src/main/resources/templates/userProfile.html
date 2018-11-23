@@ -57,6 +57,9 @@
 <div class="editProfile">
 <a class="mb-4 btn btn-primary" sec:authorize="hasAuthority('ADMIN')" role="button" th:href="@{/manageUsers}">Back to manage users</a>
 <a class="mb-4 btn btn-danger" sec:authorize="hasAuthority('ADMIN')" role="button" th:href="@{${'/deleteUser/' + user.userId}}">Delete user</a>
+<a class="mb-4 btn btn-warning" th:if="${user.enabled} == true" sec:authorize="hasAuthority('ADMIN')" role="button" th:href="@{${'/suspendUser/' + user.userId}}">Suspend user</a>
+<a class="mb-4 btn btn-success" th:if="${user.enabled} == false" sec:authorize="hasAuthority('ADMIN')" role="button" th:href="@{${'/activateUser/' + user.userId}}">Activate user</a>
+
 <div class="section">
 <button class="accordion"><h2>Basic Information</h2></button>
 <div class="panel">

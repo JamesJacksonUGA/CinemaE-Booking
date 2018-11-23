@@ -54,6 +54,12 @@
 <div class="alert alert-success alert-dismissible mb-0" id="alert" role="success" th:if="${deleted} == 'true'">
 	User has been successfully deleted.
 </div>
+<div class="alert alert-success alert-dismissible mb-0" id="alert" role="success" th:if="${suspended} == 'true'">
+	User has been successfully suspended.
+</div>
+<div class="alert alert-success alert-dismissible mb-0" id="alert" role="success" th:if="${activated} == 'true'">
+	User has been successfully activated.
+</div>
 
 <main role="main">
 
@@ -82,6 +88,8 @@
       <td th:text="${user.email}"></td>
       <td>
       	<a class="btn btn-primary" th:href="@{${'/manageUsers/' + user.userId}}">Edit</a>
+      	<a class="btn btn-warning" th:if="${user.enabled} == true" th:href="@{${'/suspendUser/' + user.userId}}">Suspend</a>
+      	<a class="btn btn-success" th:if="${user.enabled} == false" th:href="@{${'/activateUser/' + user.userId}}">Activate</a>
       	<a class="btn btn-danger" th:href="@{${'/deleteUser/' + user.userId}}">Delete</a>
       </td>
     </tr>
