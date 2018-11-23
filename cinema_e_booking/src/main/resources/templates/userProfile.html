@@ -43,8 +43,8 @@
 </div>
 
 <div class="subnav">
-	<a href="/userProfile">Edit Profile</a>
-	<a href="/recentPurchases">Recent Purchases</a>
+	<a href="/userProfile" style="background-color: #333">Edit Profile</a>
+	<a sec:authorize="hasAuthority('USER')" href="/recentPurchases">Recent Purchases</a>
 </div>
 
 <div th:if="${#httpServletRequest.remoteUser == null}">
@@ -55,6 +55,8 @@
 </div>
 
 <div class="editProfile">
+<a class="mb-4 btn btn-primary" sec:authorize="hasAuthority('ADMIN')" role="button" th:href="@{/manageUsers}">Back to manage users</a>
+<a class="mb-4 btn btn-danger" sec:authorize="hasAuthority('ADMIN')" role="button" th:href="@{${'/deleteUser/' + user.userId}}">Delete user</a>
 <div class="section">
 <button class="accordion"><h2>Basic Information</h2></button>
 <div class="panel">

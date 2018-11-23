@@ -59,7 +59,7 @@
     
     
 <!-- select2-search -->    
-<div th:fragment="select2-search">
+<div th:fragment="select2-search-movies">
 <div>
 <select class="search" id="searchBar" onchange="location = this.value;">
 				<option value="" disabled selected>Find a movie</option>
@@ -77,6 +77,31 @@ $('#searchBar').select2({
 
 </div>
 <!-- End select2-search -->
+    
+  
+  
+
+
+<!-- select2-search -->    
+<div th:fragment="select2-search-users">
+<div>
+<select class="search" id="searchBar" onchange="location = this.value;">
+	<option value="" disabled selected>Find a user</option>
+	<option th:each="user : ${users}" th:text="${user.firstName} + ' ' + ${user.lastName} + '  |  ' + ${user.email}" th:value="'/manageUsers/' + ${user.userId}">
+		User info
+	</option>
+</select>
+</div>
+
+<script>
+$('#searchBar').select2({
+	width: '25%'
+});
+</script>
+
+</div>
+<!-- End select2-search -->  
+    
     
     
     
