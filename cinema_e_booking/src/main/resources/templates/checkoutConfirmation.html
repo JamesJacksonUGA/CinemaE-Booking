@@ -53,6 +53,18 @@
               </div>
               <span class="text-muted" th:text="'$' + ${seniorPrice}">$</span>
             </li>
+            <li class="list-group-item d-flex justify-content-between lh-condensed" th:if="${tax} > 0">
+              <div>
+                <h6 class="my-0">Sales tax</h6>
+              </div>
+              <span class="text-muted" th:text="'$' + ${tax}">$</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between lh-condensed" th:if="${fee} > 0">
+              <div>
+                <h6 class="my-0">Online fee</h6>
+              </div>
+              <span class="text-muted" th:text="'$' + ${fee}">$</span>
+            </li>
             <li class="list-group-item d-flex justify-content-between bg-light" th:if="${promoCode}">
               <div class="text-success">
                 <h6 class="my-0">Promo code</h6>

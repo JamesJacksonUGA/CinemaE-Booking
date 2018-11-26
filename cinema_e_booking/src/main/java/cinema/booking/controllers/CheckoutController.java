@@ -85,9 +85,9 @@ public class CheckoutController {
 		//calculate total price
 		double tax = ticketTypeService.getPriceByType("TAX");
 		double fee = ticketTypeService.getPriceByType("FEE");
-		double adultTotal = adult*ticketTypeService.getPriceByType("ADULT") + tax + fee;
-		double childTotal = child*ticketTypeService.getPriceByType("CHILD") + tax + fee;
-		double seniorTotal = senior*ticketTypeService.getPriceByType("SENIOR") + tax + fee;
+		double adultTotal = adult*ticketTypeService.getPriceByType("ADULT");
+		double childTotal = child*ticketTypeService.getPriceByType("CHILD");
+		double seniorTotal = senior*ticketTypeService.getPriceByType("SENIOR");
 		DecimalFormat d = new DecimalFormat("#.00");
 		model.addAttribute("total", d.format(adultTotal + childTotal + seniorTotal + tax + fee));
 		
@@ -130,10 +130,12 @@ public class CheckoutController {
 		//calculate total price
 		double tax = ticketTypeService.getPriceByType("TAX");
 		double fee = ticketTypeService.getPriceByType("FEE");
-		double adultTotal = adult*ticketTypeService.getPriceByType("ADULT") + tax + fee;
-		double childTotal = child*ticketTypeService.getPriceByType("CHILD") + tax + fee;
-		double seniorTotal = senior*ticketTypeService.getPriceByType("SENIOR") + tax + fee;
+		double adultTotal = adult*ticketTypeService.getPriceByType("ADULT");
+		double childTotal = child*ticketTypeService.getPriceByType("CHILD");
+		double seniorTotal = senior*ticketTypeService.getPriceByType("SENIOR");
 		double total = adultTotal + childTotal + seniorTotal + tax + fee;
+		model.addAttribute("tax", tax);
+		model.addAttribute("fee", fee);
 		
 		//handle promotion if there is one
 		if (checkoutForm.getPromoCode() == "") {
@@ -202,9 +204,9 @@ public class CheckoutController {
 		//calculate total price
 		double tax = ticketTypeService.getPriceByType("TAX");
 		double fee = ticketTypeService.getPriceByType("FEE");
-		double adultTotal = adult*ticketTypeService.getPriceByType("ADULT") + tax + fee;
-		double childTotal = child*ticketTypeService.getPriceByType("CHILD") + tax + fee;
-		double seniorTotal = senior*ticketTypeService.getPriceByType("SENIOR") + tax + fee;
+		double adultTotal = adult*ticketTypeService.getPriceByType("ADULT");
+		double childTotal = child*ticketTypeService.getPriceByType("CHILD");
+		double seniorTotal = senior*ticketTypeService.getPriceByType("SENIOR");
 		DecimalFormat d = new DecimalFormat("#.00");
 		model.addAttribute("total", d.format(adultTotal + childTotal + seniorTotal + tax + fee));
 		
@@ -286,11 +288,8 @@ public class CheckoutController {
 		
 		String[] seatNumbers = selectedSeats.split("\\-");	
 		
-		double tax = ticketTypeService.getPriceByType("TAX");
-		double fee = ticketTypeService.getPriceByType("FEE");
-		
 		//create adult tickets
-		double adultSellingPrice = ticketTypeService.getPriceByType("ADULT") + tax + fee;
+		double adultSellingPrice = ticketTypeService.getPriceByType("ADULT");
 		Integer adultTypeId = ticketTypeService.getTicketTypeIdByType("ADULT");
 		for (int i = 0; i < adult; i++) {
 			String seatNumber = showtimeService.findTheaterIdByShowtimeId(showtime_id) + seatNumbers[i];
@@ -305,7 +304,7 @@ public class CheckoutController {
 		}
 		
 		//create child tickets
-		double childSellingPrice = ticketTypeService.getPriceByType("CHILD") + tax + fee;
+		double childSellingPrice = ticketTypeService.getPriceByType("CHILD");
 		Integer childTypeId = ticketTypeService.getTicketTypeIdByType("CHILD");
 		for (int i = 0; i < child; i++) {
 			String seatNumber = showtimeService.findTheaterIdByShowtimeId(showtime_id) + seatNumbers[adult + i];
@@ -320,7 +319,7 @@ public class CheckoutController {
 		}
 		
 		//create senior tickets
-		double seniorSellingPrice = ticketTypeService.getPriceByType("SENIOR") + tax + fee;
+		double seniorSellingPrice = ticketTypeService.getPriceByType("SENIOR");
 		Integer seniorTypeId = ticketTypeService.getTicketTypeIdByType("SENIOR");
 		for (int i = 0; i < senior; i++) {
 			String seatNumber = showtimeService.findTheaterIdByShowtimeId(showtime_id) + seatNumbers[adult + child + i];

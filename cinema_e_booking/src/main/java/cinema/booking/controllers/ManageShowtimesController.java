@@ -100,109 +100,109 @@ public class ManageShowtimesController {
 				else if (i >= 13 && i < 25) {
 					Seat seat = new Seat((hallNo + "B" + (i-12)), false, showtime1);
 					seatService.addSeat(seat);
-					seat = new Seat((hallNo + "B" + i), false, showtime2);
+					seat = new Seat((hallNo + "B" + (i-12)), false, showtime2);
 					seatService.addSeat(seat);
-					seat = new Seat((hallNo + "B" + i), false, showtime3);
+					seat = new Seat((hallNo + "B" + (i-12)), false, showtime3);
 					seatService.addSeat(seat);
-					seat = new Seat((hallNo + "B" + i), false, showtime4);
+					seat = new Seat((hallNo + "B" + (i-12)), false, showtime4);
 					seatService.addSeat(seat);
-					seat = new Seat((hallNo + "B" + i), false, showtime5);
+					seat = new Seat((hallNo + "B" + (i-12)), false, showtime5);
 					seatService.addSeat(seat);
 				}
 				else if (i >= 25 && i < 37) {
 					Seat seat = new Seat((hallNo + "C" + (i-24)), false, showtime1);
 					seatService.addSeat(seat);
-					seat = new Seat((hallNo + "C" + i), false, showtime2);
+					seat = new Seat((hallNo + "C" + (i-24)), false, showtime2);
 					seatService.addSeat(seat);
-					seat = new Seat((hallNo + "C" + i), false, showtime3);
+					seat = new Seat((hallNo + "C" + (i-24)), false, showtime3);
 					seatService.addSeat(seat);
-					seat = new Seat((hallNo + "C" + i), false, showtime4);
+					seat = new Seat((hallNo + "C" + (i-24)), false, showtime4);
 					seatService.addSeat(seat);
-					seat = new Seat((hallNo + "C" + i), false, showtime5);
+					seat = new Seat((hallNo + "C" + (i-24)), false, showtime5);
 					seatService.addSeat(seat);
 				}
 				else if (i >= 37 && i < 49) {
 					Seat seat = new Seat((hallNo + "D" + (i-36)), false, showtime1);
 					seatService.addSeat(seat);
-					seat = new Seat((hallNo + "D" + i), false, showtime2);
+					seat = new Seat((hallNo + "D" + (i-36)), false, showtime2);
 					seatService.addSeat(seat);
-					seat = new Seat((hallNo + "D" + i), false, showtime3);
+					seat = new Seat((hallNo + "D" + (i-36)), false, showtime3);
 					seatService.addSeat(seat);
-					seat = new Seat((hallNo + "D" + i), false, showtime4);
+					seat = new Seat((hallNo + "D" + (i-36)), false, showtime4);
 					seatService.addSeat(seat);
-					seat = new Seat((hallNo + "D" + i), false, showtime5);
+					seat = new Seat((hallNo + "D" + (i-36)), false, showtime5);
 					seatService.addSeat(seat);
 				}
 				else if (i >= 49 && i < 61) {
 					Seat seat = new Seat((hallNo + "E" + (i-48)), false, showtime1);
 					seatService.addSeat(seat);
-					seat = new Seat((hallNo + "E" + i), false, showtime2);
+					seat = new Seat((hallNo + "E" + (i-48)), false, showtime2);
 					seatService.addSeat(seat);
-					seat = new Seat((hallNo + "E" + i), false, showtime3);
+					seat = new Seat((hallNo + "E" + (i-48)), false, showtime3);
 					seatService.addSeat(seat);
-					seat = new Seat((hallNo + "E" + i), false, showtime4);
+					seat = new Seat((hallNo + "E" + (i-48)), false, showtime4);
 					seatService.addSeat(seat);
-					seat = new Seat((hallNo + "E" + i), false, showtime5);
+					seat = new Seat((hallNo + "E" + (i-48)), false, showtime5);
 					seatService.addSeat(seat);
 				}
 				else if (i >= 61 && i < 73) {
 					Seat seat = new Seat((hallNo + "F" + (i-60)), false, showtime1);
 					seatService.addSeat(seat);
-					seat = new Seat((hallNo + "F" + i), false, showtime2);
+					seat = new Seat((hallNo + "F" + (i-60)), false, showtime2);
 					seatService.addSeat(seat);
-					seat = new Seat((hallNo + "F" + i), false, showtime3);
+					seat = new Seat((hallNo + "F" + (i-60)), false, showtime3);
 					seatService.addSeat(seat);
-					seat = new Seat((hallNo + "F" + i), false, showtime4);
+					seat = new Seat((hallNo + "F" + (i-60)), false, showtime4);
 					seatService.addSeat(seat);
-					seat = new Seat((hallNo + "F" + i), false, showtime5);
+					seat = new Seat((hallNo + "F" + (i-60)), false, showtime5);
 					seatService.addSeat(seat);
 				}
 				else if (i >= 73 && i < 85) {
 					Seat seat = new Seat((hallNo + "G" + (i-72)), false, showtime1);
 					seatService.addSeat(seat);
-					seat = new Seat((hallNo + "G" + i), false, showtime2);
+					seat = new Seat((hallNo + "G" + (i-72)), false, showtime2);
 					seatService.addSeat(seat);
-					seat = new Seat((hallNo + "G" + i), false, showtime3);
+					seat = new Seat((hallNo + "G" + (i-72)), false, showtime3);
 					seatService.addSeat(seat);
-					seat = new Seat((hallNo + "G" + i), false, showtime4);
+					seat = new Seat((hallNo + "G" + (i-72)), false, showtime4);
 					seatService.addSeat(seat);
-					seat = new Seat((hallNo + "G" + i), false, showtime5);
+					seat = new Seat((hallNo + "G" + (i-72)), false, showtime5);
 					seatService.addSeat(seat);
 				}
 				else if (i >= 85 && i < 97) {
 					Seat seat = new Seat((hallNo + "H" + (i-84)), false, showtime1);
 					seatService.addSeat(seat);
-					seat = new Seat((hallNo + "H" + i), false, showtime2);
+					seat = new Seat((hallNo + "H" + (i-84)), false, showtime2);
 					seatService.addSeat(seat);
-					seat = new Seat((hallNo + "H" + i), false, showtime3);
+					seat = new Seat((hallNo + "H" + (i-84)), false, showtime3);
 					seatService.addSeat(seat);
-					seat = new Seat((hallNo + "H" + i), false, showtime4);
+					seat = new Seat((hallNo + "H" + (i-84)), false, showtime4);
 					seatService.addSeat(seat);
-					seat = new Seat((hallNo + "H" + i), false, showtime5);
+					seat = new Seat((hallNo + "H" + (i-84)), false, showtime5);
 					seatService.addSeat(seat);
 				}
 				else if (i >= 97 && i < 109) {
 					Seat seat = new Seat((hallNo + "I" + (i-96)), false, showtime1);
 					seatService.addSeat(seat);
-					seat = new Seat((hallNo + "I" + i), false, showtime2);
+					seat = new Seat((hallNo + "I" + (i-96)), false, showtime2);
 					seatService.addSeat(seat);
-					seat = new Seat((hallNo + "I" + i), false, showtime3);
+					seat = new Seat((hallNo + "I" + (i-96)), false, showtime3);
 					seatService.addSeat(seat);
-					seat = new Seat((hallNo + "I" + i), false, showtime4);
+					seat = new Seat((hallNo + "I" + (i-96)), false, showtime4);
 					seatService.addSeat(seat);
-					seat = new Seat((hallNo + "I" + i), false, showtime5);
+					seat = new Seat((hallNo + "I" + (i-96)), false, showtime5);
 					seatService.addSeat(seat);
 				}
 				else if (i >= 109 && i < 121) {
 					Seat seat = new Seat((hallNo + "J" + (i-108)), false, showtime1);
 					seatService.addSeat(seat);
-					seat = new Seat((hallNo + "J" + i), false, showtime2);
+					seat = new Seat((hallNo + "J" + (i-108)), false, showtime2);
 					seatService.addSeat(seat);
-					seat = new Seat((hallNo + "J" + i), false, showtime3);
+					seat = new Seat((hallNo + "J" + (i-108)), false, showtime3);
 					seatService.addSeat(seat);
-					seat = new Seat((hallNo + "J" + i), false, showtime4);
+					seat = new Seat((hallNo + "J" + (i-108)), false, showtime4);
 					seatService.addSeat(seat);
-					seat = new Seat((hallNo + "J" + i), false, showtime5);
+					seat = new Seat((hallNo + "J" + (i-108)), false, showtime5);
 					seatService.addSeat(seat);
 				}
 			}
