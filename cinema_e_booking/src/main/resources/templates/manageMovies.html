@@ -40,7 +40,6 @@
 
 <div class="subnav">
 	<a sec:authorize="hasAuthority('ADMIN')" href="/manageMovies" style="background-color: red;">Add Movies</a>
-	<a sec:authorize="hasAuthority('ADMIN')" href="/editMovie">Edit Movie</a>
 </div>
 
 
@@ -55,7 +54,9 @@
 	
 		
 		<div class="form-title-row">
-			<h1>Add Movie</h1>	
+			<h1>Add Movie</h1>
+			<br>
+			<p>Movies can be edited and deleted from the browse movies page</p>	
 		</div>
 		
 		<div class="form-row">
