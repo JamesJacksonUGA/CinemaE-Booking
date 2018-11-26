@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="en">
+<head>
+    <title>Athens Tickets</title>
+    <link href="/css/carousel.css" rel="stylesheet">
+    <link href="/css/homepagestyle.css" rel="stylesheet" type="text/css">
+    <link href="/css/form-basic.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.css" th:href="@{/bootstrap/css/bootstrap.css}"/>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+    
+    
+<body>
+
+<div class="header">
+    <h1>Athens Tickets</h1>
+</div>    
+    
+<div class="topnav sticky">
+
+	<!-- Pages for all users and admins -->
+    <a href="/home">Home</a>
+    <a href="/movies">Movies</a>
+    <a href="#">Showtimes</a>
+    
+    <!-- Pages for Admin -->
+    <a sec:authorize="hasAuthority('ADMIN')" href="/manageMovies">Manage Movies</a>
+    <a sec:authorize="hasAuthority('ADMIN')" href="/manageShowtimes" style="background-color: red">Manage Showtimes</a>
+    <a sec:authorize="hasAuthority('ADMIN')" href="/manageHalls">Manage Halls</a>
+    <a sec:authorize="hasAuthority('ADMIN')" href="/manageUsers">Manage Users</a>
+    <a sec:authorize="hasAuthority('ADMIN')" href="/addPromotion">Promotions</a>    
+    <!-- Page for Registered User -->
+    <a sec:authorize="hasAuthority('USER')" href="/userProfile">Profile</a>
+    
+    <div class="search-container">
+        <form action="/action_page.php">
+            <input type="text" id="searchBar" placeholder="Search for movie">
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    
+    <div th:insert="fragments/general.html :: loginform"></div>
+</div>
+
+<div class="alert alert-success alert-dismissible mb-0" id="alert" role="success" th:if="${added} == 'true'">
+	<button type="button" class="close" data-dismiss="alert">&times;</button>
+	Showtimes have been successfully added.
+</div>
+<div class="alert alert-danger alert-dismissible mb-0" id="alert" role="danger" th:if="${duplicate} == 'true'">
+	<button type="button" class="close" data-dismiss="alert">&times;</button>
+	The selected theater already has show times for the chosen date.
+</div>
+
+<div class="main-content">
+	
+	<form id="showtimeInfo" class="form-basic needs-validation" th:action="@{/addShowtime}" method="post">
+		
+		<div class="form-title-row">
+			<h1>Add Showtime</h1>
+		</div>
+			<p>A movie may be assigned to a chosen hall on a chosen date</p>
+		<div class="form-row">
+			<label>
+				<span>Theater Hall</span>
+				<select name="hall" id="hall">
+					<option th:each="theater : ${theaters}" th:value="${theater.hallNumber}" th:text="${theater.hallNumber}"> Hall number</option>
+				</select>
+			</label>
+		</div>
+		
+		<div class="form-row">
+			<label>
+				<span>Available Movies</span>
+				<select id="movieId" name="movieId">
+					<option th:each="movie :${movies}" th:value="${movie.movieId}" th:text="${movie.title}">Movie</option>
+				</select>
+			</label>
+			
+		</div>
+		
+		<div class="form-row">
+			<label>
+				<span>Select Date</span>
+				
+			</label>
+			<input type="date" id="date" name="date">
+			
+		</div>
+		
+		<div class="form-row">
+			<button type="submit">Submit Movie</button>
+		</div>
+	
+	</form>
+	
+</div>
+
+
+
+   
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+<script src="../../assets/js/vendor/popper.min.js"></script>
+<script src="../../dist/js/bootstrap.min.js"></script>
+<script src="../../assets/js/vendor/holder.min.js"></script>
+<script>
+  (function() {
+    'use strict';
+
+    window.addEventListener('load', function() {
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.getElementsByClassName('needs-validation');
+
+      // Loop over them and prevent submission
+      var validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    }, false);
+  })();
+</script>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+</body>
+    
+</html>
+
+
+

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.js"></script>
+
+<link href="css/homepagestyle.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+
+<select data-live-search="true" data-live-search-style="startsWith" class="selectpicker">
+	<option value="Search movies">Search movies</option>    
+    <optgroup label="Now Playing">
+    	<option th:each="movie: ${nowPlaying}" th:text="${movie.title}"></option>
+    </optgroup>
+    <optgroup label="Coming Soon">
+    	<option th:each="movie: ${comingSoon}" th:text="${movie.title}"></option>
+    </optgroup>
+</select>
+
+
+</body>
+
+</html>

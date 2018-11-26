@@ -23,23 +23,17 @@
 	<!-- Pages for all users and admins -->
     <a href="/home">Home</a>
     <a href="/movies">Movies</a>
-    <a href="#">Showtimes</a>
     
     <!-- Pages for Admin -->
     <a sec:authorize="hasAuthority('ADMIN')" href="/manageMovies">Manage Movies</a>
     <a sec:authorize="hasAuthority('ADMIN')" href="/manageShowtimes" style="background-color: red">Manage Showtimes</a>
     <a sec:authorize="hasAuthority('ADMIN')" href="/manageHalls">Manage Halls</a>
     <a sec:authorize="hasAuthority('ADMIN')" href="/manageUsers">Manage Users</a>
-    <a sec:authorize="hasAuthority('ADMIN')" href="/addPromotion">Promotions</a>    
+    <a sec:authorize="hasAuthority('ADMIN')" href="/addPromotion">Promotions</a> 
+    <a sec:authorize="hasAuthority('ADMIN')" href="/managePricing">Pricing</a>  
+        
     <!-- Page for Registered User -->
     <a sec:authorize="hasAuthority('USER')" href="/userProfile">Profile</a>
-    
-    <div class="search-container">
-        <form action="/action_page.php">
-            <input type="text" id="searchBar" placeholder="Search for movie">
-            <button type="submit">Submit</button>
-        </form>
-    </div>
     
     <div th:insert="fragments/general.html :: loginform"></div>
 </div>

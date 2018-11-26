@@ -34,13 +34,6 @@
     <!-- Page for Registered User -->
     <a sec:authorize="hasAuthority('USER')" href="/userProfile">Profile</a>
     
-    <div class="search-container">
-        <form action="/action_page.php">
-            <input type="text" id="searchBar" placeholder="Search for movie">
-            <button type="submit">Submit</button>
-        </form>
-    </div>
-    
     <div th:insert="fragments/general.html :: loginform"></div>
 </div>
 
@@ -54,6 +47,10 @@
 <div class="alert alert-success alert-dismissible mb-0" id="alert" role="success" th:if="${activated} == 'true'">
 	<button type="button" class="close" data-dismiss="alert">&times;</button>
 	Your account has been activated. You may now sign in.
+</div>
+<div class="alert alert-success alert-dismissible mb-0" id="alert" role="success" th:if="${updated} == 'true'">
+	<button type="button" class="close" data-dismiss="alert">&times;</button>
+	Your email has been changed. You may now sign in.
 </div>
 <div class="alert alert-success alert-dismissible mb-0" id="alert" role="success" th:if="${registered} == 'true'">
 	<button type="button" class="close" data-dismiss="alert">&times;</button>

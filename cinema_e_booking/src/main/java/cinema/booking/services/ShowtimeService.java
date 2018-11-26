@@ -39,7 +39,7 @@ public class ShowtimeService {
 		return showtimeRepository.findShowtimeByDate(date, movieId);
 	}
 	
-	public Showtime findShowtimeByDateTheaterId(String date, Integer theaterId) {
+	public List<Showtime> findShowtimeByDateTheaterId(String date, Integer theaterId) {
 		return showtimeRepository.findShowtimeByDateTheaterId(date, theaterId);
 	}
 	

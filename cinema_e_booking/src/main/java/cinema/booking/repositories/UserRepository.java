@@ -1,5 +1,7 @@
 package cinema.booking.repositories;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -23,5 +25,8 @@ public interface UserRepository extends CrudRepository<User, Integer> {
 
 	@Query(value="SELECT * FROM user u where u.user_id = :userId", nativeQuery=true)
 	User findUserById(@Param("userId") Integer userId);
+
+	@Query(value="SELECT * FROM user u where u.recieve_promotions=true", nativeQuery=true)
+	List<User> findUsersWithPromo();
 	
 }

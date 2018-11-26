@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +51,8 @@ public class ManageShowtimesController {
 			Model model) throws ParseException {
 		
 		//make sure there isn't a showtime already set for selected theater and date
-		if (showtimeService.findShowtimeByDateTheaterId(date, hall) == null) {
+		List<Showtime> showtimes = showtimeService.findShowtimeByDateTheaterId(date, hall);
+		if (showtimes.isEmpty()) {
 			Theater theater = theaterService.getTheaterByHallNumber(hall);
 			Movie movie = movieService.findMovieById(movieId);
 			

@@ -31,6 +31,9 @@ public class UserService {
 	public User findUserById(Integer userId) {
 		return userRepository.findUserById(userId);
 	}
+	public List<User> findUsersWithPromo() {
+		return userRepository.findUsersWithPromo();
+	}
 	
 	public void addUser(User user) {
 		userRepository.save(user);

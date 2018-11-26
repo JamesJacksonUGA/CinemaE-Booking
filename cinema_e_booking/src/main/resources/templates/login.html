@@ -15,6 +15,11 @@
 	<!-- Custom styles for this template -->
     <link href="/css/signin.css" rel="stylesheet">
   </head>
+  	
+  	<div class="alert alert-success alert-dismissible mb-0" id="alert" role="success" th:if="${updated} == 'true'">
+	<button type="button" class="close" data-dismiss="alert">&times;</button>
+	Your email has been changed. You may now sign in.
+	</div>
 
   <body class="text-center">
     <form class="form-signin" th:action="@{/login}" method="post">

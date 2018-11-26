@@ -23,23 +23,17 @@
 	<!-- Pages for all users and admins -->
     <a href="/home">Home</a>
     <a href="/movies">Movies</a>
-    <a href="#">Showtimes</a>
     
     <!-- Pages for Admin -->
     <a sec:authorize="hasAuthority('ADMIN')" href="/manageMovies">Manage Movies</a>
     <a sec:authorize="hasAuthority('ADMIN')" href="/manageShowtimes">Manage Showtimes</a>
     <a sec:authorize="hasAuthority('ADMIN')" href="/manageHalls">Manage Halls</a>
     <a sec:authorize="hasAuthority('ADMIN')" href="/manageUsers">Manage Users</a>
-    <a sec:authorize="hasAuthority('ADMIN')" href="/addPromotion"   style="background-color: red">Promotions</a>    
+    <a sec:authorize="hasAuthority('ADMIN')" href="/addPromotion" style="background-color: red">Promotions</a> 
+    <a sec:authorize="hasAuthority('ADMIN')" href="/managePricing">Pricing</a>  
+        
     <!-- Page for Registered User -->
     <a sec:authorize="hasAuthority('USER')" href="/userProfile">Profile</a>
-    
-    <div class="search-container">
-        <form action="/action_page.php">
-            <input type="text" id="searchBar" placeholder="Search for movie">
-            <button type="submit">Submit</button>
-        </form>
-    </div>
     
     <div th:insert="fragments/general.html :: loginform"></div>
 </div>
@@ -127,6 +121,40 @@
 		
 		<div class="form-row">
 			<button type="submit">Delete Promotion</button>
+		</div>
+	</form>
+	</div>
+	<div class="col-6">
+		<form class="form-basic needs-validation"  th:action="@{/sendEmail}" method="post">	
+		
+		<div class="form-title-row">
+			<h1>Send promotional email to subscribers</h1>	
+		</div>
+		
+		<div class="form-row">
+			<label>
+				<span>Email subject</span>
+			</label>	    
+		    
+		    <input type="text"  class="form-control" id="subject" name="subject" value="" required>
+			<div class="invalid-feedback">
+		    	Valid subject is required.
+		    </div>	
+		</div>
+		
+		<div class="form-row">
+			<label>
+				<span>Email message</span>
+			</label>	    
+		    
+		    <input type="text"  class="form-control" id="message" name="message" value="" required>
+			<div class="invalid-feedback">
+		    	Valid message is required.
+		    </div>	
+		</div>
+		
+		<div class="form-row">
+			<button type="submit">Send</button>
 		</div>
 	</form>
 	</div>

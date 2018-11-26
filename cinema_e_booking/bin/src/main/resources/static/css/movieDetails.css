@@ -1,0 +1,36 @@
+.detail-container {
+	max-width: 750px;
+	width: auto;
+	height: auto;
+	margin: 0 auto;
+	padding: 55px;
+	box-sizing: border-box;
+	background-color:  #ffffff;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+	overflow: hidden;
+    font: bold 14px sans-serif;
+    text-align:center;
+    
+    
+}
+
+.detail-container .column {
+	float: left;
+	width: 50%;
+	padding: 10px;
+}
+
+li {
+	margin-top: 10px;
+	list-style-type: none;
+	margin-left: -40px;
+}
+
+.detail-container input[type=submit], input[type=button] {
+	background-color: #1E90FF;
+	border: none;
+	color: white;
+	padding: 5px 8px;
+	border-radius: 25px;
+	margin-top: 10px;
+}

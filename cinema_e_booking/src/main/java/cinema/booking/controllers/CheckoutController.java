@@ -148,7 +148,8 @@ public class CheckoutController {
 			total = total - (total*(percentOff/100));
 			
 			model.addAttribute("promoCode", checkoutForm.getPromoCode());
-			model.addAttribute("amountOff", amountOff);
+			DecimalFormat d = new DecimalFormat("#.00");
+			model.addAttribute("amountOff", d.format(amountOff));
 			model.addAttribute("percentOff", percentOff);
 		}
 		else if (checkoutForm.getPromoCode() != null

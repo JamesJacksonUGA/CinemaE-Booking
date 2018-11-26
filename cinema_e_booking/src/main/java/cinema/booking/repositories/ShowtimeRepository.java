@@ -24,7 +24,7 @@ public interface ShowtimeRepository extends CrudRepository<Showtime, Integer> {
 	List<Showtime> findShowtimeByDate(String date, Integer movieId);
 
 	@Query(value="SELECT * FROM showtime WHERE CAST(date_time as DATE) = :date AND theater_hall_number= :theaterId", nativeQuery=true)
-	Showtime findShowtimeByDateTheaterId(String date, Integer theaterId);
+	List<Showtime> findShowtimeByDateTheaterId(String date, Integer theaterId);
 
 	@Query(value="SELECT theater_hall_number FROM showtime WHERE showtime_id = :showtimeId", nativeQuery=true)
 	Integer findTheaterHallByShowtimeId(Integer showtimeId);
