@@ -1,7 +1,6 @@
 package cinema.booking.controllers;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,8 +27,8 @@ public class TheaterController {
 	}
 	
 	@GetMapping("/theater/{theaterId}")
-	public Optional<Theater> getTheaterById(@PathVariable Integer theaterId) {
-		return theaterService.getTheaterById(theaterId);
+	public Theater getTheaterById(@PathVariable Integer theaterId) {
+		return theaterService.getTheaterByHallNumber(theaterId);
 	}
 	
 	@PostMapping("/theater")

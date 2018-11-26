@@ -25,12 +25,19 @@ public class Seat {
 	private Showtime showtime;
 	@ManyToOne
 	@JsonBackReference
-	private Booking booking;
+	private Booking booking = null;
 	
 	
 	
 	public Seat() {
 		
+	}
+	public Seat(@NotNull String seatNo, @NotNull boolean taken,
+			Showtime showtime) {
+		super();
+		this.seatNo = seatNo;
+		this.taken = taken;
+		this.showtime = showtime;
 	}
 	public Seat(@NotNull String seatNo, @NotNull boolean taken,
 			Showtime showtime, Booking booking) {
@@ -70,5 +77,6 @@ public class Seat {
 	public void setSeatNo(String seatNo) {
 		this.seatNo = seatNo;
 	}
+	
 	
 }

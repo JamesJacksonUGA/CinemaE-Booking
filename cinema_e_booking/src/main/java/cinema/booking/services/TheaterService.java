@@ -2,7 +2,6 @@ package cinema.booking.services;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,8 +22,8 @@ public class TheaterService {
 		return theaters;
 	}
 
-	public Optional<Theater> getTheaterById(Integer theaterId) {
-		return theaterRepository.findById(theaterId);
+	public Theater getTheaterByHallNumber(Integer hallNumber) {
+		return theaterRepository.findByHallNumber(hallNumber);
 	}
 	
 	public void addTheater(Theater theater) {
@@ -37,5 +36,9 @@ public class TheaterService {
 	
 	public void deleteTheaterById(Integer theaterId) {
 		theaterRepository.deleteById(theaterId);
+	}
+	
+	public void deleteTheaterByHallNumber(Integer hallNumber) {
+		theaterRepository.deleteByHallNumber(hallNumber);
 	}
 }

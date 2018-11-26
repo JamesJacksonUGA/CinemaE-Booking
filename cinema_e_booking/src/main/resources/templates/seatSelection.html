@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="en">
 <head>
 	<title>Select Seats</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -19,14 +19,12 @@
 <div class="topnav sticky">
     <a href="/home">Home</a>
     <a href="/movies">Movies</a>
-    <a href="#">Showtimes</a>
     
-    <!-- Pages for Admin -->
-    <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Movies</a>
-    <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Showtimes</a>
-    <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Halls</a>
-    <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Users</a>
-    <a sec:authorize="hasAuthority('ADMIN')" href="#" >View Reports</a>
+   <!-- Pages for Admin -->
+    <a sec:authorize="hasAuthority('ADMIN')" href="/manageMovies">Manage Movies</a>
+    <a sec:authorize="hasAuthority('ADMIN')" href="/manageShowtimes">Manage Showtimes</a>
+    <a sec:authorize="hasAuthority('ADMIN')" href="/manageHalls">Manage Halls</a>
+    <a sec:authorize="hasAuthority('ADMIN')" href="/manageUsers">Manage Users</a>
         
     <!-- Page for Registered User -->
     <a sec:authorize="hasAuthority('USER')" href="/userProfile">Profile</a>
@@ -47,14 +45,8 @@
         
             <!-- input fields -->
             <div class="inputForm">
-                <h3>fill the required details below and select your seats</h3>
+                <h3>Select your seats below</h3>
                 <div class="mr_agilemain">
-                    <div class="agileits-left">
-                        <label> Name
-                            <span>*</span>
-                        </label>
-                        <input type="text" id="Username" required>
-                    </div>
                     <div class="agileits-right">
                         <label th:text="'Number of seats: ' + ${ticketTypes.total}"> Number of Seats
                             <span>*</span>
@@ -62,7 +54,6 @@
                         <input type="number" id="Numseats" required min="1" th:value="${ticketTypes.total}" style="display: none;">
                     </div>
                 </div>
-                <button onclick="takeData()">Start Selecting</button>
             </div>
             
             <form class="form-basic" th:action="@{'/checkout/' + ${movie.movieId} + '/' + ${showtime.showtimeId}}" th:object="${selectedSeats}" method="post" id="selectSeatsForm">
@@ -71,8 +62,6 @@
             <!-- seat availabilty list -->
             <ul class="seat_w3ls">
                 <li class="smallBox greenBox">Selected Seat</li>
-
-                <li class="smallBox redBox">Reserved Seat</li>
 
                 <li class="smallBox emptyBox">Empty Seat</li>
             </ul>
@@ -100,205 +89,205 @@
                     <tr>
                         <td>A</td>
                         <td>
-                            <input type="checkbox" class="seats" value="A1">
+                            <input th:if="${A1.taken == false}" type="checkbox" class="seats" value="A1">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="A2">
+                            <input th:if="${A2.taken == false}" type="checkbox" class="seats" value="A2">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="A3">
+                            <input th:if="${A3.taken == false}" type="checkbox" class="seats" value="A3">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="A4">
+                            <input th:if="${A4.taken == false}" type="checkbox" class="seats" value="A4">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="A5">
+                            <input th:if="${A5.taken == false}" type="checkbox" class="seats" value="A5">
                         </td>
                         <td class="seatGap"></td>
                         <td>
-                            <input type="checkbox" class="seats" value="A6">
+                            <input th:if="${A6.taken == false}" type="checkbox" class="seats" value="A6">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="A7">
+                            <input th:if="${A7.taken == false}" type="checkbox" class="seats" value="A7">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="A8">
+                            <input th:if="${A8.taken == false}" type="checkbox" class="seats" value="A8">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="A9">
+                            <input th:if="${A9.taken == false}" type="checkbox" class="seats" value="A9">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="A10">
+                            <input th:if="${A10.taken == false}" type="checkbox" class="seats" value="A10">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="A11">
+                            <input th:if="${A11.taken == false}" type="checkbox" class="seats" value="A11">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="A12">
+                            <input th:if="${A12.taken == false}" type="checkbox" class="seats" value="A12">
                         </td>
                     </tr>
 
                     <tr>
                         <td>B</td>
                         <td>
-                            <input type="checkbox" class="seats" value="B1">
+                        	<input th:if="${B1.taken == false}" type="checkbox" class="seats" value="B1">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="B2">
+                            <input th:if="${B2.taken == false}" type="checkbox" class="seats" value="B2">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="B3">
+                            <input th:if="${B3.taken == false}" type="checkbox" class="seats" value="B3">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="B4">
+                            <input th:if="${B4.taken == false}" type="checkbox" class="seats" value="B4">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="B5">
+                            <input th:if="${B5.taken == false}" type="checkbox" class="seats" value="B5">
                         </td>
                         <td></td>
                         <td>
-                            <input type="checkbox" class="seats" value="B6">
+                            <input th:if="${B6.taken == false}" type="checkbox" class="seats" value="B6">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="B7">
+                            <input th:if="${B7.taken == false}" type="checkbox" class="seats" value="B7">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="B8">
+                            <input th:if="${B8.taken == false}" type="checkbox" class="seats" value="B8">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="B9">
+                            <input th:if="${B9.taken == false}" type="checkbox" class="seats" value="B9">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="B10">
+                            <input th:if="${B10.taken == false}" type="checkbox" class="seats" value="B10">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="B11">
+                            <input th:if="${B11.taken == false}" type="checkbox" class="seats" value="B11">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="B12">
+                            <input th:if="${B12.taken == false}" type="checkbox" class="seats" value="B12">
                         </td>
                     </tr>
 
                     <tr>
                         <td>C</td>
                         <td>
-                            <input type="checkbox" class="seats" value="C1">
+                            <input th:if="${C1.taken == false}" type="checkbox" class="seats" value="C1">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="C2">
+                            <input th:if="${C2.taken == false}" type="checkbox" class="seats" value="C2">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="C3">
+                            <input th:if="${C3.taken == false}" type="checkbox" class="seats" value="C3">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="C4">
+                            <input th:if="${C4.taken == false}" type="checkbox" class="seats" value="C4">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="C5">
+                            <input th:if="${C5.taken == false}" type="checkbox" class="seats" value="C5">
                         </td>
                         <td></td>
                         <td>
-                            <input type="checkbox" class="seats" value="C6">
+                            <input th:if="${C6.taken == false}" type="checkbox" class="seats" value="C6">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="C7">
+                            <input th:if="${C7.taken == false}" type="checkbox" class="seats" value="C7">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="C8">
+                            <input th:if="${C8.taken == false}" type="checkbox" class="seats" value="C8">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="C9">
+                            <input th:if="${C9.taken == false}" type="checkbox" class="seats" value="C9">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="C10">
+                            <input th:if="${C10.taken == false}" type="checkbox" class="seats" value="C10">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="C11">
+                            <input th:if="${C11.taken == false}" type="checkbox" class="seats" value="C11">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="C12">
+                            <input th:if="${C12.taken == false}" type="checkbox" class="seats" value="C12">
                         </td>
                     </tr>
 
                     <tr>
                         <td>D</td>
                         <td>
-                            <input type="checkbox" class="seats" value="D1">
+                            <input th:if="${D1.taken == false}" type="checkbox" class="seats" value="D1">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="D2">
+                            <input th:if="${D2.taken == false}" type="checkbox" class="seats" value="D2">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="D3">
+                            <input th:if="${D3.taken == false}" type="checkbox" class="seats" value="D3">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="D4">
+                            <input th:if="${D4.taken == false}" type="checkbox" class="seats" value="D4">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="D5">
+                            <input th:if="${D5.taken == false}" type="checkbox" class="seats" value="D5">
                         </td>
                         <td></td>
                         <td>
-                            <input type="checkbox" class="seats" value="D6">
+                            <input th:if="${D6.taken == false}" type="checkbox" class="seats" value="D6">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="D7">
+                            <input th:if="${D7.taken == false}" type="checkbox" class="seats" value="D7">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="D8">
+                            <input th:if="${D8.taken == false}" type="checkbox" class="seats" value="D8">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="D9">
+                            <input th:if="${D9.taken == false}" type="checkbox" class="seats" value="D9">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="D10">
+                            <input th:if="${D10.taken == false}" type="checkbox" class="seats" value="D10">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="D11">
+                            <input th:if="${D11.taken == false}" type="checkbox" class="seats" value="D11">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="D12">
+                            <input th:if="${D12.taken == false}" type="checkbox" class="seats" value="D12">
                         </td>
                     </tr>
 
                     <tr>
                         <td>E</td>
                         <td>
-                            <input type="checkbox" class="seats" value="E1">
+                            <input th:if="${E1.taken == false}" type="checkbox" class="seats" value="E1">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="E2">
+                            <input th:if="${E2.taken == false}" type="checkbox" class="seats" value="E2">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="E3">
+                            <input th:if="${E3.taken == false}" type="checkbox" class="seats" value="E3">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="E4">
+                            <input th:if="${E4.taken == false}" type="checkbox" class="seats" value="E4">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="E5">
+                            <input th:if="${E5.taken == false}" type="checkbox" class="seats" value="E5">
                         </td>
                         <td></td>
                         <td>
-                            <input type="checkbox" class="seats" value="E6">
+                            <input th:if="${E6.taken == false}" type="checkbox" class="seats" value="E6">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="E7">
+                            <input th:if="${E7.taken == false}" type="checkbox" class="seats" value="E7">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="E8">
+                            <input th:if="${E8.taken == false}" type="checkbox" class="seats" value="E8">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="E9">
+                            <input th:if="${E9.taken == false}" type="checkbox" class="seats" value="E9">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="E10">
+                            <input th:if="${E10.taken == false}" type="checkbox" class="seats" value="E10">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="E11">
+                            <input th:if="${E11.taken == false}" type="checkbox" class="seats" value="E11">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="E12">
+                            <input th:if="${E12.taken == false}" type="checkbox" class="seats" value="E12">
                         </td>
                     </tr>
 
@@ -307,205 +296,205 @@
                     <tr>
                         <td>F</td>
                         <td>
-                            <input type="checkbox" class="seats" value="F1">
+                            <input th:if="${F1.taken == false}" type="checkbox" class="seats" value="F1">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="F2">
+                            <input th:if="${F2.taken == false}" type="checkbox" class="seats" value="F2">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="F3">
+                            <input th:if="${F3.taken == false}" type="checkbox" class="seats" value="F3">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="F4">
+                            <input th:if="${F4.taken == false}" type="checkbox" class="seats" value="F4">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="F5">
+                            <input th:if="${F5.taken == false}" type="checkbox" class="seats" value="F5">
                         </td>
                         <td></td>
                         <td>
-                            <input type="checkbox" class="seats" value="F6">
+                            <input th:if="${F6.taken == false}" type="checkbox" class="seats" value="F6">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="F7">
+                            <input th:if="${F7.taken == false}" type="checkbox" class="seats" value="F7">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="F8">
+                            <input th:if="${F8.taken == false}" type="checkbox" class="seats" value="F8">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="F9">
+                            <input th:if="${F9.taken == false}" type="checkbox" class="seats" value="F9">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="F10">
+                            <input th:if="${F10.taken == false}" type="checkbox" class="seats" value="F10">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="F11">
+                            <input th:if="${F11.taken == false}" type="checkbox" class="seats" value="F11">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="F12">
+                            <input th:if="${F12.taken == false}" type="checkbox" class="seats" value="F12">
                         </td>
                     </tr>
 
                     <tr>
                         <td>G</td>
                         <td>
-                            <input type="checkbox" class="seats" value="G1">
+                            <input th:if="${G1.taken == false}" type="checkbox" class="seats" value="G1">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="G2">
+                            <input th:if="${G2.taken == false}" type="checkbox" class="seats" value="G2">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="G3">
+                            <input th:if="${G3.taken == false}" type="checkbox" class="seats" value="G3">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="G4">
+                            <input th:if="${G4.taken == false}" type="checkbox" class="seats" value="G4">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="G5">
+                            <input th:if="${G5.taken == false}" type="checkbox" class="seats" value="G5">
                         </td>
                         <td></td>
                         <td>
-                            <input type="checkbox" class="seats" value="G6">
+                            <input th:if="${G6.taken == false}" type="checkbox" class="seats" value="G6">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="G7">
+                            <input th:if="${G7.taken == false}" type="checkbox" class="seats" value="G7">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="G8">
+                            <input th:if="${G8.taken == false}" type="checkbox" class="seats" value="G8">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="G9">
+                            <input th:if="${G9.taken == false}" type="checkbox" class="seats" value="G9">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="G10">
+                            <input th:if="${G10.taken == false}" type="checkbox" class="seats" value="G10">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="G11">
+                            <input th:if="${G11.taken == false}" type="checkbox" class="seats" value="G11">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="G12">
+                            <input th:if="${G12.taken == false}" type="checkbox" class="seats" value="G12">
                         </td>
                     </tr>
 
                     <tr>
                         <td>H</td>
                         <td>
-                            <input type="checkbox" class="seats" value="H1">
+                            <input th:if="${H1.taken == false}" type="checkbox" class="seats" value="H1">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="H2">
+                            <input th:if="${H2.taken == false}" type="checkbox" class="seats" value="H2">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="H3">
+                            <input th:if="${H3.taken == false}" type="checkbox" class="seats" value="H3">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="H4">
+                            <input th:if="${H4.taken == false}" type="checkbox" class="seats" value="H4">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="H5">
+                            <input th:if="${H5.taken == false}" type="checkbox" class="seats" value="H5">
                         </td>
                         <td></td>
                         <td>
-                            <input type="checkbox" class="seats" value="H6">
+                            <input th:if="${H6.taken == false}" type="checkbox" class="seats" value="H6">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="H7">
+                            <input th:if="${H7.taken == false}" type="checkbox" class="seats" value="H7">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="H8">
+                            <input th:if="${H8.taken == false}" type="checkbox" class="seats" value="H8">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="H9">
+                            <input th:if="${H9.taken == false}" type="checkbox" class="seats" value="H9">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="H10">
+                            <input th:if="${H10.taken == false}" type="checkbox" class="seats" value="H10">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="H11">
+                            <input th:if="${H11.taken == false}" type="checkbox" class="seats" value="H11">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="H12">
+                            <input th:if="${H12.taken == false}" type="checkbox" class="seats" value="H12">
                         </td>
                     </tr>
 
                     <tr>
                         <td>I</td>
                         <td>
-                            <input type="checkbox" class="seats" value="I1">
+                            <input th:if="${I1.taken == false}" type="checkbox" class="seats" value="I1">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="I2">
+                            <input th:if="${I2.taken == false}" type="checkbox" class="seats" value="I2">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="I3">
+                            <input th:if="${I3.taken == false}" type="checkbox" class="seats" value="I3">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="I4">
+                            <input th:if="${I4.taken == false}" type="checkbox" class="seats" value="I4">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="I5">
+                            <input th:if="${I5.taken == false}" type="checkbox" class="seats" value="I5">
                         </td>
                         <td></td>
                         <td>
-                            <input type="checkbox" class="seats" value="I6">
+                            <input th:if="${I6.taken == false}" type="checkbox" class="seats" value="I6">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="I7">
+                            <input th:if="${I7.taken == false}" type="checkbox" class="seats" value="I7">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="I8">
+                            <input th:if="${I8.taken == false}" type="checkbox" class="seats" value="I8">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="I9">
+                            <input th:if="${I9.taken == false}" type="checkbox" class="seats" value="I9">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="I10">
+                            <input th:if="${I10.taken == false}" type="checkbox" class="seats" value="I10">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="I11">
+                            <input th:if="${I11.taken == false}" type="checkbox" class="seats" value="I11">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="I12">
+                            <input th:if="${I12.taken == false}" type="checkbox" class="seats" value="I12">
                         </td>
                     </tr>
 
                     <tr>
                         <td>J</td>
                         <td>
-                            <input type="checkbox" class="seats" value="J1">
+                            <input th:if="${J1.taken == false}" type="checkbox" class="seats" value="J1">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="J2">
+                            <input th:if="${J2.taken == false}" type="checkbox" class="seats" value="J2">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="J3">
+                            <input th:if="${J3.taken == false}" type="checkbox" class="seats" value="J3">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="J4">
+                            <input th:if="${J4.taken == false}" type="checkbox" class="seats" value="J4">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="J5">
+                            <input th:if="${J5.taken == false}" type="checkbox" class="seats" value="J5">
                         </td>
                         <td></td>
                         <td>
-                            <input type="checkbox" class="seats" value="J6">
+                            <input th:if="${J6.taken == false}" type="checkbox" class="seats" value="J6">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="J7">
+                            <input th:if="${J7.taken == false}" type="checkbox" class="seats" value="J7">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="J8">
+                            <input th:if="${J8.taken == false}" type="checkbox" class="seats" value="J8">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="J9">
+                            <input th:if="${J9.taken == false}" type="checkbox" class="seats" value="J9">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="J10">
+                            <input th:if="${J10.taken == false}" type="checkbox" class="seats" value="J10">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="J11">
+                            <input th:if="${J11.taken == false}" type="checkbox" class="seats" value="J11">
                         </td>
                         <td>
-                            <input type="checkbox" class="seats" value="J12">
+                            <input th:if="${J12.taken == false}" type="checkbox" class="seats" value="J12">
                         </td>
                     </tr>
                 </table>
@@ -516,28 +505,7 @@
                 <button onclick="updateTextArea()">Confirm Selection</button>
             </div>
             <!-- //seat layout -->
-            <!-- details after booking displayed here -->
-            <div class="displayerBoxes txt-center" style="overflow-x:auto;">
-                <table class="Displaytable w3ls-table" width="100%">
-                    <tr>
-                        <th>Name</th>
-                        <th>Number of Seats</th>
-                        <th>Seats</th>
-                    </tr>
-                    <tr>
-                        <td>
-                            <textarea id="nameDisplay"></textarea>
-                        </td>
-                        <td>
-                            <textarea id="NumberDisplay"></textarea>
-                        </td>
-                        <td>
-                            <textarea id="selectedSeats"></textarea>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <!-- //details after booking displayed here -->
+            
         
         </form>    
         </div>
@@ -545,27 +513,25 @@
 
 
 <div class="copy-wthree">
-        <p>© Athens Tickets . All Rights Reserved | Design by
-            <a href="http://w3layouts.com/" target="_blank">W3layouts</a>
+        <p>© Athens Tickets
         </p>
 </div>
 
 <!-- script for seat selection -->
 <script th:inline="javascript">
+	window.onload = takeData();
+
 	function onLoaderFunc() {
 		$(".seatStructure *").prop("disabled", true);
         $(".displayerBoxes *").prop("disabled", true);
 	}
 	
 	function takeData() {
-        if (($("#Username").val().length == 0) || ($("#Numseats").val().length == 0)) {
-            alert("Please Enter your Name");
-        } else {
-            $(".inputForm *").prop("disabled", true);
-            $(".seatStructure *").prop("disabled", false);
-            document.getElementById("notification").innerHTML =
-                "<b style='margin-bottom:0px;background:#ff9800;letter-spacing:1px;'>Please Select your Seats NOW!</b>";
-        }
+	    $(".inputForm *").prop("disabled", true);
+	    $(".seatStructure *").prop("disabled", false);
+	    document.getElementById("notification").innerHTML =
+	        "<b style='margin-bottom:0px;background:#ff9800;letter-spacing:1px;'>Please Select your Seats NOW!</b>";
+
     }
 	
 	function updateTextArea() {

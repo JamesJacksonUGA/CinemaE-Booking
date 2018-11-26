@@ -24,11 +24,11 @@
     <a href="#">Showtimes</a>
     
     <!-- Pages for Admin -->
-    <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Movies</a>
+    <a sec:authorize="hasAuthority('ADMIN')" href="/manageMovies">Manage Movies</a>
     <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Showtimes</a>
     <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Halls</a>
-    <a sec:authorize="hasAuthority('ADMIN')" href="#">Manage Users</a>
-    <a sec:authorize="hasAuthority('ADMIN')" href="#" >View Reports</a>
+    <a sec:authorize="hasAuthority('ADMIN')" href="/manageUsers">Manage Users</a>
+    <a sec:authorize="hasAuthority('ADMIN')" href="/addPromotion" >Promotions</a>
         
     <!-- Page for Registered User -->
     <a sec:authorize="hasAuthority('USER')"  style="background-color: red" href="/userProfile">Profile</a>
@@ -54,6 +54,10 @@
 	</div>
 </div>
 
+<div class="alert alert-success alert-dismissible mb-0" id="alert" role="success" th:if="${updated} == 'true'">
+	Information has been successfully updated.
+</div>
+
 <div class="editProfile">
 <a class="mb-4 btn btn-primary" sec:authorize="hasAuthority('ADMIN')" role="button" th:href="@{/manageUsers}">Back to manage users</a>
 <a class="mb-4 btn btn-danger" sec:authorize="hasAuthority('ADMIN')" role="button" th:href="@{${'/deleteUser/' + user.userId}}">Delete user</a>
@@ -63,30 +67,30 @@
 <div class="section">
 <button class="accordion"><h2>Basic Information</h2></button>
 <div class="panel">
-	<form class="form-basic">
+	<form class="form-basic" th:action="@{/basicInfo}" method="post">
   		<div class="form-row">
 			<label>
 				<span>First Name (Mandatory)</span>
 			</label>
-			<input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+			<input type="text" class="form-control" id="firstName" name="firstName" th:value="${user.firstName}" required>
   		</div>
   		<div class="form-row">
 			<label>
 				<span>Last Name (Mandatory)</span>
 			</label>
-			<input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+			<input type="text" class="form-control" id="lastName" name="lastName" th:value="${user.lastName}" required>
   		</div>
   		<div class="form-row">
 			<label>
 				<span>Phone Number (Mandatory)</span>
 			</label>
-			<input type="text" class="form-control" id="phoneNumber" placeholder="" value="" required>
+			<input type="text" class="form-control" id="phone" name="phone" th:value="${user.phone}" required>
   		</div>
   		<div class="form-row">
 			<label>
-				<span>Birth Date (Mandatory)</span>
+				<span>Birth Date</span>
 			</label>
-			<input type="text" class="form-control" id="birthDate" placeholder="" value="" readonly>
+			<input type="text" class="form-control" id="birthDate" placeholder="" th:value="${user.birthDate}" readonly>
   		</div>
  		<div class="form-row">
 			<button type="submit">Save Information</button>
@@ -103,7 +107,7 @@
   			<label>
   				<span>Current Email</span>
   			</label>
-  			<input type="text" class="form-control" id="oldEmail" placeholder="" value="Current Email" readonly>
+  			<input type="text" class="form-control" id="oldEmail" placeholder="" th:value="${user.email}" readonly>
   		</div>
   		<div class="form-row">
 			<label>
@@ -130,12 +134,12 @@
 <div class="section">
 <button class="accordion"><h2>Change Password</h2></button>
 <div class="panel">
-  <form class="form-basic">
+  <form class="form-basic" th:action="@{/passwordChange}">
   		<div class="form-row">
 			<label>
 				<span>Current Password (Mandatory)</span>
 			</label>
-			<input type="password" class="form-control" id="currentPassword" placeholder="" value="" required>
+			<input type="password" class="form-control" id="currentPassword" name="currentPassword" value="" required>
   		</div>
   		<div class="form-row">
 			<label>

@@ -36,6 +36,10 @@ public class TicketTypeService {
 		return ticketTypeRepository.findById(ticketTypeId);
 	}
 	
+	public TicketType findTicketTypeByType(String type) {
+		return ticketTypeRepository.findTicketTypeByType(type);
+	}
+	
 	public void addTicketType(TicketType ticketType) {
 		ticketTypeRepository.save(ticketType);
 	}

@@ -45,7 +45,22 @@
 </div>
 
 
-	<form id="addHall" class="form-basic needs-validation">
+<div class="alert alert-danger alert-dismissible mb-0" id="alert" role="danger" th:if="${duplicate} == 'true'">
+	<button type="button" class="close" data-dismiss="alert">&times;</button>
+	A theater with this hall number already exists. Please enter a unique hall number.
+</div>
+<div class="alert alert-success alert-dismissible mb-0" id="alert" role="success" th:if="${added} == 'true'">
+	<button type="button" class="close" data-dismiss="alert">&times;</button>
+	Theater has been successfully added.
+</div>
+<div class="alert alert-success alert-dismissible mb-0" id="alert" role="success" th:if="${deleted} == 'true'">
+	<button type="button" class="close" data-dismiss="alert">&times;</button>
+	Theater has been successfully deleted.
+</div>
+
+<div class="row">
+<div class="col">
+	<form id="addHall" class="form-basic needs-validation" th:action="@{/addHall}" method="post">
 		
 		<div class="form-title-row">
 			<h1>Add Theaters</h1>
@@ -56,16 +71,16 @@
 				<span>Theater Number</span>
 			</label>
 			
-			<input type="number" id="theaterNumber">
+			<input type="number" id="hallNumber" name="hallNumber" class="form-control" required value="">
 		</div>
 		
 		<div class="form-row">
-			<button type="submit">Submit Theater Hall</button>
+			<button type="submit">Add Theater Hall</button>
 		</div>
 	
 	</form>
 	
-	<form id="removeHall" class="form-basic needs-validation">
+	<form id="removeHall" class="form-basic needs-validation" th:action="@{/deleteHall}" method="post">
 		
 		<div class="form-title-row">
 			<h1>Remove Theater Hall</h1>
@@ -73,9 +88,9 @@
 		
 		<div class="form-row">
 			<label>
-				<span>Theater Number to be removed</span>
-				<select>
-					<option id="1"> Theater 1</option>
+				<span>Number of hall to be removed</span>
+				<select name="removeHall" id="removeHall">
+					<option th:each="theater : ${theaters}" th:text="'Hall ' + ${theater.hallNumber}" th:value="${theater.hallNumber}"> Theater 1</option>
 				</select>
 			</label>
 			
@@ -87,8 +102,16 @@
 		</div>
 	
 	</form>
-	
+</div>
 
+<div class="col text-center">
+	<h2 class="my-5">All current halls</h2>
+
+	<div th:each="theater : ${theaters}">
+		<p th:text="${theater.hallNumber}"></p>
+	</div>
+</div>
+</div>
 
 
 

@@ -27,7 +27,7 @@
     
     <!-- Pages for Admin -->
     <a sec:authorize="hasAuthority('ADMIN')" href="/manageMovies">Manage Movies</a>
-    <a sec:authorize="hasAuthority('ADMIN')" href="/manageShowtimes"  style="background-color: red">Manage Showtimes</a>
+    <a sec:authorize="hasAuthority('ADMIN')" href="/manageShowtimes" style="background-color: red">Manage Showtimes</a>
     <a sec:authorize="hasAuthority('ADMIN')" href="/manageHalls">Manage Halls</a>
     <a sec:authorize="hasAuthority('ADMIN')" href="/manageUsers">Manage Users</a>
     <a sec:authorize="hasAuthority('ADMIN')" href="/addPromotion">Promotions</a>    
@@ -44,19 +44,28 @@
     <div th:insert="fragments/general.html :: loginform"></div>
 </div>
 
+<div class="alert alert-success alert-dismissible mb-0" id="alert" role="success" th:if="${added} == 'true'">
+	<button type="button" class="close" data-dismiss="alert">&times;</button>
+	Showtimes have been successfully added.
+</div>
+<div class="alert alert-danger alert-dismissible mb-0" id="alert" role="danger" th:if="${duplicate} == 'true'">
+	<button type="button" class="close" data-dismiss="alert">&times;</button>
+	The selected theater already has show times for the chosen date.
+</div>
+
 <div class="main-content">
 	
-	<form id="showtimeInfo" class="form-basic needs-validation">
+	<form id="showtimeInfo" class="form-basic needs-validation" th:action="@{/addShowtime}" method="post">
 		
 		<div class="form-title-row">
 			<h1>Add Showtime</h1>
 		</div>
-		
+			<p>A movie may be assigned to a chosen hall on a chosen date</p>
 		<div class="form-row">
 			<label>
 				<span>Theater Hall</span>
-				<select>
-					<option id="1"> Theater 1</option>
+				<select name="hall" id="hall">
+					<option th:each="theater : ${theaters}" th:value="${theater.hallNumber}" th:text="${theater.hallNumber}"> Hall number</option>
 				</select>
 			</label>
 		</div>
@@ -64,8 +73,8 @@
 		<div class="form-row">
 			<label>
 				<span>Available Movies</span>
-				<select>
-					<option id="1">Avengers</option>
+				<select id="movieId" name="movieId">
+					<option th:each="movie :${movies}" th:value="${movie.movieId}" th:text="${movie.title}">Movie</option>
 				</select>
 			</label>
 			
@@ -76,7 +85,7 @@
 				<span>Select Date</span>
 				
 			</label>
-			<input type="date" id="date">
+			<input type="date" id="date" name="date">
 			
 		</div>
 		

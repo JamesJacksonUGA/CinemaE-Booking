@@ -22,14 +22,14 @@
 	<!-- Pages for all users and admins -->
     <a href="/home" style="background-color: red">Home</a>
     <a href="/movies">Movies</a>
-    <a href="#">Showtimes</a>
     
     <!-- Pages for Admin -->
     <a sec:authorize="hasAuthority('ADMIN')" href="/manageMovies">Manage Movies</a>
     <a sec:authorize="hasAuthority('ADMIN')" href="/manageShowtimes">Manage Showtimes</a>
     <a sec:authorize="hasAuthority('ADMIN')" href="/manageHalls">Manage Halls</a>
     <a sec:authorize="hasAuthority('ADMIN')" href="/manageUsers">Manage Users</a>
-    <a sec:authorize="hasAuthority('ADMIN')" href="/addPromotion">Promotions</a>  
+    <a sec:authorize="hasAuthority('ADMIN')" href="/addPromotion">Promotions</a> 
+    <a sec:authorize="hasAuthority('ADMIN')" href="/managePricing">Pricing</a>  
         
     <!-- Page for Registered User -->
     <a sec:authorize="hasAuthority('USER')" href="/userProfile">Profile</a>
@@ -69,11 +69,11 @@
 </div>
 <div class="alert alert-success alert-dismissible mb-0" id="alert" role="success" th:if="${checkout} == 'true'">
 	<button type="button" class="close" data-dismiss="alert">&times;</button>
-	<span th:text="'Checkout succesfful. A confirmation email has been sent to ' + ${user.email}"></span> 
+	<span th:text="'Checkout succesful. A confirmation email has been sent to ' + ${user.email}"></span> 
 </div>
 <div class="alert alert-danger alert-dismissible mb-0" id="alert" role="danger" th:if="${failedToSendCheckout} == 'true'">
 	<button type="button" class="close" data-dismiss="alert">&times;</button>
-	<span th:text="'Checkout succesfful. However, a confirmation email failed to send to ' + ${user.email}"></span> 
+	<span th:text="'Checkout succesful. However, a confirmation email failed to send to ' + ${user.email}"></span> 
 </div>
 
    

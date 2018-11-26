@@ -5,8 +5,6 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -19,13 +17,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 public class Theater {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer theaterId;
 	@NotNull
-	private String name;
-	private String city;
-	private String state;
-	private String zipCode;
+	private Integer hallNumber;
 	@OneToMany(cascade = CascadeType.ALL, 
 	        mappedBy = "theater", orphanRemoval = true)
 	@JsonBackReference
@@ -40,35 +33,15 @@ public class Theater {
 	public Theater() {
 		
 	}
-	public Integer getTheaterId() {
-		return theaterId;
+	public Theater(@NotNull Integer hallNumber) {
+		super();
+		this.hallNumber = hallNumber;
 	}
-	public void setTheaterId(Integer theaterId) {
-		this.theaterId = theaterId;
+	public Integer getHallNumber() {
+		return hallNumber;
 	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getCity() {
-		return city;
-	}
-	public void setCity(String city) {
-		this.city = city;
-	}
-	public String getState() {
-		return state;
-	}
-	public void setState(String state) {
-		this.state = state;
-	}
-	public String getZipCode() {
-		return zipCode;
-	}
-	public void setZipCode(String zipCode) {
-		this.zipCode = zipCode;
+	public void setHallNumber(Integer hallNumber) {
+		this.hallNumber = hallNumber;
 	}
 	public void addShowtime(Showtime showtime) {
         showtimes.add(showtime);

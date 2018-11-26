@@ -24,7 +24,6 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class Showtime {
 
 	@Id
-	@NotNull
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer showtimeId;
 	@NotNull
@@ -36,7 +35,7 @@ public class Showtime {
 	@NotNull
 	@ManyToOne
 	@JsonManagedReference
-	private Theater theater;
+	private Theater theater = new Theater(-1);
 	private String showStatus;
 	@OneToMany(cascade = CascadeType.ALL, 
 	        mappedBy = "showtime", orphanRemoval = true)
@@ -49,6 +48,13 @@ public class Showtime {
 	
 	public Showtime() {
 		
+	}
+	public Showtime(@NotNull Date dateTime, @NotNull Movie movie, @NotNull Theater theater, String showStatus) {
+		super();
+		this.dateTime = dateTime;
+		this.movie = movie;
+		this.theater = theater;
+		this.showStatus = showStatus;
 	}
 	public Integer getShowtimeId() {
 		return showtimeId;

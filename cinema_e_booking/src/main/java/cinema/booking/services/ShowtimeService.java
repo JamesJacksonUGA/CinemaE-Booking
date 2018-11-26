@@ -32,11 +32,15 @@ public class ShowtimeService {
 	}
 	
 	public Integer findTheaterIdByShowtimeId(Integer showtimeId) {
-		return showtimeRepository.findTheaterIdByShowtimeId(showtimeId);
+		return showtimeRepository.findTheaterHallByShowtimeId(showtimeId);
 	}
 	
 	public List<Showtime> findShowtimeByDate(String date, Integer movieId) {
 		return showtimeRepository.findShowtimeByDate(date, movieId);
+	}
+	
+	public Showtime findShowtimeByDateTheaterId(String date, Integer theaterId) {
+		return showtimeRepository.findShowtimeByDateTheaterId(date, theaterId);
 	}
 	
 	public void addShowtime(Showtime showtime) {

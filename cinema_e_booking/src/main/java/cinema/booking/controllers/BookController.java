@@ -47,7 +47,7 @@ public class BookController {
 		//unwrap Optional<Movie> object before adding to model
 		movieService.getMovieById(movie_id).ifPresent(o -> model.addAttribute("movie", o));
 		model.addAttribute("movies", movieService.getAllMovies());
-		theaterService.getTheaterById(theater_id).ifPresent(o -> model.addAttribute("theater", o));
+		model.addAttribute("theater", theaterService.getTheaterByHallNumber(theater_id));
 		model.addAttribute("theaters", theaterService.getAllTheaters());
 		model.addAttribute("showtimes", showtimeRepository.findByTheaterIdMovieId(theater_id, movie_id));
 		
@@ -60,7 +60,7 @@ public class BookController {
 		//unwrap Optional<Movie> object before adding to model
 		movieService.getMovieById(movie_id).ifPresent(o -> model.addAttribute("movie", o));
 		model.addAttribute("movies", movieService.getAllMovies());
-		theaterService.getTheaterById(theater_id).ifPresent(o -> model.addAttribute("theater", o));
+		model.addAttribute("theater", theaterService.getTheaterByHallNumber(theater_id));
 		model.addAttribute("theaters", theaterService.getAllTheaters());
 		model.addAttribute("chosenShowtime", showtimeService.getShowtimeById(showtime_id));
 		model.addAttribute("showtimes", showtimeRepository.findByTheaterIdMovieId(theater_id, movie_id));

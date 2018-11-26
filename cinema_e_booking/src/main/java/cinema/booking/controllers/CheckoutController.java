@@ -1,5 +1,7 @@
 package cinema.booking.controllers;
 
+import java.text.DecimalFormat;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
@@ -81,16 +83,21 @@ public class CheckoutController {
 		model.addAttribute("senior", senior);
 		
 		//calculate total price
-		double adultTotal = adult*ticketTypeService.getPriceByType("ADULT");
-		double childTotal = child*ticketTypeService.getPriceByType("CHILD");
-		double seniorTotal = senior*ticketTypeService.getPriceByType("SENIOR");
-		model.addAttribute("total", (adultTotal + childTotal + seniorTotal));
+		double tax = ticketTypeService.getPriceByType("TAX");
+		double fee = ticketTypeService.getPriceByType("FEE");
+		double adultTotal = adult*ticketTypeService.getPriceByType("ADULT") + tax + fee;
+		double childTotal = child*ticketTypeService.getPriceByType("CHILD") + tax + fee;
+		double seniorTotal = senior*ticketTypeService.getPriceByType("SENIOR") + tax + fee;
+		DecimalFormat d = new DecimalFormat("#.00");
+		model.addAttribute("total", d.format(adultTotal + childTotal + seniorTotal + tax + fee));
 		
 		model.addAttribute("selectedSeats", selectedSeats);
 		
 		model.addAttribute("adultPrice", ticketTypeService.getPriceByType("ADULT"));
 		model.addAttribute("childPrice", ticketTypeService.getPriceByType("CHILD"));
 		model.addAttribute("seniorPrice", ticketTypeService.getPriceByType("SENIOR"));
+		model.addAttribute("tax", tax);
+		model.addAttribute("fee", fee);
 		
 		//get logged in user
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -121,10 +128,12 @@ public class CheckoutController {
 		model.addAttribute("senior", senior);
 		
 		//calculate total price
-		double adultTotal = adult*ticketTypeService.getPriceByType("ADULT");
-		double childTotal = child*ticketTypeService.getPriceByType("CHILD");
-		double seniorTotal = senior*ticketTypeService.getPriceByType("SENIOR");
-		double total = adultTotal + childTotal + seniorTotal;
+		double tax = ticketTypeService.getPriceByType("TAX");
+		double fee = ticketTypeService.getPriceByType("FEE");
+		double adultTotal = adult*ticketTypeService.getPriceByType("ADULT") + tax + fee;
+		double childTotal = child*ticketTypeService.getPriceByType("CHILD") + tax + fee;
+		double seniorTotal = senior*ticketTypeService.getPriceByType("SENIOR") + tax + fee;
+		double total = adultTotal + childTotal + seniorTotal + tax + fee;
 		
 		//handle promotion if there is one
 		if (checkoutForm.getPromoCode() == "") {
@@ -149,13 +158,16 @@ public class CheckoutController {
 			return "redirect:/checkout/" + movie_id + "/" + showtime_id + "/" + adult + "/" + child + "/" + senior + "/" + selectedSeats + "/error";
 		}
 		
-		model.addAttribute("total", total);
+		DecimalFormat d = new DecimalFormat("#.00");
+		model.addAttribute("total", d.format(total));
 		
 		model.addAttribute("selectedSeats", selectedSeats);
 		
 		model.addAttribute("adultPrice", ticketTypeService.getPriceByType("ADULT"));
 		model.addAttribute("childPrice", ticketTypeService.getPriceByType("CHILD"));
 		model.addAttribute("seniorPrice", ticketTypeService.getPriceByType("SENIOR"));
+		model.addAttribute("tax", tax);
+		model.addAttribute("fee", fee);
 		
 		//get logged in user
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -187,16 +199,21 @@ public class CheckoutController {
 		model.addAttribute("senior", senior);
 		
 		//calculate total price
-		double adultTotal = adult*ticketTypeService.getPriceByType("ADULT");
-		double childTotal = child*ticketTypeService.getPriceByType("CHILD");
-		double seniorTotal = senior*ticketTypeService.getPriceByType("SENIOR");
-		model.addAttribute("total", (adultTotal + childTotal + seniorTotal));
+		double tax = ticketTypeService.getPriceByType("TAX");
+		double fee = ticketTypeService.getPriceByType("FEE");
+		double adultTotal = adult*ticketTypeService.getPriceByType("ADULT") + tax + fee;
+		double childTotal = child*ticketTypeService.getPriceByType("CHILD") + tax + fee;
+		double seniorTotal = senior*ticketTypeService.getPriceByType("SENIOR") + tax + fee;
+		DecimalFormat d = new DecimalFormat("#.00");
+		model.addAttribute("total", d.format(adultTotal + childTotal + seniorTotal + tax + fee));
 		
 		model.addAttribute("selectedSeats", selectedSeats);
 		
 		model.addAttribute("adultPrice", ticketTypeService.getPriceByType("ADULT"));
 		model.addAttribute("childPrice", ticketTypeService.getPriceByType("CHILD"));
 		model.addAttribute("seniorPrice", ticketTypeService.getPriceByType("SENIOR"));
+		model.addAttribute("tax", tax);
+		model.addAttribute("fee", fee);
 		
 		//get logged in user
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -268,11 +285,11 @@ public class CheckoutController {
 		
 		String[] seatNumbers = selectedSeats.split("\\-");	
 		
-//NEED TO HANDLE THIS TAX LATER****************************************************************************
-		double salesTax = 0.30;
+		double tax = ticketTypeService.getPriceByType("TAX");
+		double fee = ticketTypeService.getPriceByType("FEE");
 		
 		//create adult tickets
-		double adultSellingPrice = ticketTypeService.getPriceByType("ADULT") + salesTax;
+		double adultSellingPrice = ticketTypeService.getPriceByType("ADULT") + tax + fee;
 		Integer adultTypeId = ticketTypeService.getTicketTypeIdByType("ADULT");
 		for (int i = 0; i < adult; i++) {
 			String seatNumber = showtimeService.findTheaterIdByShowtimeId(showtime_id) + seatNumbers[i];
@@ -280,12 +297,14 @@ public class CheckoutController {
 			ticketService.addTicket(ticket);
 			
 			//update seat corresponding with ticket
-			Seat seat = new Seat(seatNumber, true, showtimeService.findShowtimeById(showtime_id), booking);
+			Seat seat = seatService.findBySeatNoShowtimeId(seatNumber, showtime_id);
+			seat.setTaken(true);
+			seat.setBooking(booking);
 			seatService.updateSeat(seat);
 		}
 		
 		//create child tickets
-		double childSellingPrice = ticketTypeService.getPriceByType("CHILD") + salesTax;
+		double childSellingPrice = ticketTypeService.getPriceByType("CHILD") + tax + fee;
 		Integer childTypeId = ticketTypeService.getTicketTypeIdByType("CHILD");
 		for (int i = 0; i < child; i++) {
 			String seatNumber = showtimeService.findTheaterIdByShowtimeId(showtime_id) + seatNumbers[adult + i];
@@ -293,12 +312,14 @@ public class CheckoutController {
 			ticketService.addTicket(ticket);
 			
 			//update seat corresponding with ticket
-			Seat seat = new Seat(seatNumber, true, showtimeService.findShowtimeById(showtime_id), booking);
+			Seat seat = seatService.findBySeatNoShowtimeId(seatNumber, showtime_id);
+			seat.setTaken(true);
+			seat.setBooking(booking);
 			seatService.updateSeat(seat);
 		}
 		
 		//create senior tickets
-		double seniorSellingPrice = ticketTypeService.getPriceByType("SENIOR") + salesTax;
+		double seniorSellingPrice = ticketTypeService.getPriceByType("SENIOR") + tax + fee;
 		Integer seniorTypeId = ticketTypeService.getTicketTypeIdByType("SENIOR");
 		for (int i = 0; i < senior; i++) {
 			String seatNumber = showtimeService.findTheaterIdByShowtimeId(showtime_id) + seatNumbers[adult + child + i];
@@ -306,7 +327,9 @@ public class CheckoutController {
 			ticketService.addTicket(ticket);
 			
 			//update seat corresponding with ticket
-			Seat seat = new Seat(seatNumber, true, showtimeService.findShowtimeById(showtime_id), booking);
+			Seat seat = seatService.findBySeatNoShowtimeId(seatNumber, showtime_id);
+			seat.setTaken(true);
+			seat.setBooking(booking);
 			seatService.updateSeat(seat);
 		}
 		

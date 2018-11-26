@@ -27,6 +27,14 @@ public class SeatService {
 		return seatRepository.findById(seatId);
 	}
 	
+	public Seat findBySeatNoShowtimeId(String seatNo, Integer showtimeId) {
+		return seatRepository.findBySeatNoShowtimeId(seatNo, showtimeId);
+	}
+	
+	public List<Seat> getSeatsByShowtimeId(Integer showtimeId) {
+		return seatRepository.getSeatsByShowtimeId(showtimeId);
+	}
+	
 	public void addSeat(Seat seat) {
 		seatRepository.save(seat);
 	}

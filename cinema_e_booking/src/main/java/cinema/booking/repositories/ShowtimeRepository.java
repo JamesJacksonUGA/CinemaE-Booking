@@ -10,7 +10,7 @@ import cinema.booking.models.Showtime;
 
 public interface ShowtimeRepository extends CrudRepository<Showtime, Integer> {
 	
-	@Query(value="SELECT * FROM showtime s where s.theater_theater_id = :theaterId AND s.movie_movie_id = :movieId", nativeQuery=true) 
+	@Query(value="SELECT * FROM showtime s where s.theater_hall_number = :theaterId AND s.movie_movie_id = :movieId", nativeQuery=true) 
 	List<Showtime> findByTheaterIdMovieId(@Param("theaterId") Integer theaterId, @Param("movieId") Integer movieId);
 
 	List<Showtime> findByMovieMovieId(Integer movieId);
@@ -22,5 +22,11 @@ public interface ShowtimeRepository extends CrudRepository<Showtime, Integer> {
 
 	@Query(value="SELECT * FROM showtime WHERE CAST(date_time as DATE) = :date AND movie_movie_id= :movieId", nativeQuery=true)
 	List<Showtime> findShowtimeByDate(String date, Integer movieId);
+
+	@Query(value="SELECT * FROM showtime WHERE CAST(date_time as DATE) = :date AND theater_hall_number= :theaterId", nativeQuery=true)
+	Showtime findShowtimeByDateTheaterId(String date, Integer theaterId);
+
+	@Query(value="SELECT theater_hall_number FROM showtime WHERE showtime_id = :showtimeId", nativeQuery=true)
+	Integer findTheaterHallByShowtimeId(Integer showtimeId);
 	
 }

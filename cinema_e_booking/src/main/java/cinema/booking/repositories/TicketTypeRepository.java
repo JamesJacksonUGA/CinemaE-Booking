@@ -12,6 +12,9 @@ public interface TicketTypeRepository extends CrudRepository<TicketType, Integer
 	double findPriceByType(@Param("type") String type);
 
 	@Query("SELECT ticketTypeId FROM TicketType where type = :type") 
-	Integer findTicketTypeIdByType(@Param("type") String type);	
+	Integer findTicketTypeIdByType(@Param("type") String type);
+
+	@Query(value="SELECT * FROM ticket_type where type= :type", nativeQuery=true)
+	TicketType findTicketTypeByType(@Param("type") String type);	
 	
 }
