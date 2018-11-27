@@ -76,6 +76,8 @@ public class RecentPurchasesController {
 			double adultPrice = ticketTypeService.getPriceByType("ADULT");
 			double childPrice = ticketTypeService.getPriceByType("CHILD");
 			double seniorPrice = ticketTypeService.getPriceByType("SENIOR");
+			double tax = ticketTypeService.getPriceByType("TAX");
+			double fee = ticketTypeService.getPriceByType("FEE");
 			
 			if (adult > 0) {
 				adultPrice = ticketService.getAdultSellingPrice(bookingId);
@@ -86,7 +88,7 @@ public class RecentPurchasesController {
 			if (senior > 0) {
 				seniorPrice = ticketService.getSeniorSellingPrice(bookingId);
 			}
-			double total = (adult*adultPrice) + (child*childPrice) + (senior*seniorPrice);
+			double total = (adult*adultPrice) + (child*childPrice) + (senior*seniorPrice) + tax + fee;
 			
 			RecentPurchase recentPurchase = new RecentPurchase(
 					movie.getTitle(),
