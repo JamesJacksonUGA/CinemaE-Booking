@@ -55,9 +55,7 @@
 	<div class="section" th:each="recentPurchase : ${recentPurchases}">
 		<button class="accordion"><h2 th:text="${recentPurchase.title}">Movie title</h2></button>
 			<div class="panel">
-				<nav>
-					<p><img src="src/main/resources/static/images/infinityWar.jpg"></p>			
-				</nav>
+			
 				
 				<article>
 					<p><span th:text="${recentPurchase.title}">Movie Title</span></p>
